@@ -80,6 +80,7 @@
         <h2 id="question-text">Which word has the <em>ai</em> vowel team?</h2>
         <p id="question-hint">Listen, then choose the best answer.</p>
         <button id="question-listen" class="listen-btn" type="button">🔊 Hear the question</button>
+        <div id="question-visual" class="question-visual" aria-live="off"></div>
         <div id="choices" class="choices"></div>
         <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
         <div id="practice-popup" class="practice-popup" hidden><div><small>LISTEN &amp; REPEAT</small><strong id="practice-text"></strong></div><button id="practice-replay" type="button" aria-label="Hear the practice sentence again">🔊</button></div>
@@ -91,7 +92,7 @@
     <section id="results" class="screen results" aria-labelledby="results-title">
       <div class="results-heading"><span class="results-medal">🏅</span><div><span class="eyebrow">EXPEDITION COMPLETE!</span><h1 id="results-title">Amazing work!</h1><p id="student-report-name"></p><p id="results-message"></p></div></div>
       <div class="results-layout">
-        <button id="reward-card" class="reward-card" type="button"><span class="reward-label">NEW REWARD</span><span class="reward-orb">🎁</span><strong id="reward-card-title">Explorer Dress-Up</strong><small>Tap to open the adventure pack →</small></button>
+        <button id="reward-card" class="reward-card" type="button" aria-haspopup="dialog"><span class="reward-label">NEW REWARD</span><img id="reward-preview" class="reward-gift" src="assets/images/kids-3d-present-box.webp" alt="A colorful 3D present box containing the Nature Expedition dress-up reward" loading="lazy" decoding="async" /><strong id="reward-card-title">Explorer Dress-Up</strong><small>Tap to dress your GP Friend →</small></button>
         <div class="results-main">
           <div class="results-grid">
             <article class="score-card"><div id="score-ring" class="score-ring"><span id="score-number">0</span><small>/ 20</small></div><h2 id="score-title">Great trail!</h2><p id="score-note"></p></article>
@@ -112,7 +113,7 @@
   </div>
 
   <div id="reward-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reward-title" hidden>
-    <div class="modal-dialog reward-dialog"><button id="reward-close" class="modal-close" type="button" aria-label="Close">×</button><div class="reward-modal-heading"><div><span class="eyebrow">YOUR SCORE REWARD</span><h2 id="reward-title">Explorer Dress-Up!</h2><p id="reward-unlock-message"></p></div><button id="reward-reset" class="secondary-btn" type="button">↻ Start over</button></div><div class="reward-game"><div class="character-dropzone"><span class="drop-hint">Tap an unlocked item to dress your GP Friend</span><div class="character-stage"><img id="reward-character" src="assets/characters/gerry.png" alt="GP Friend ready for dress-up" /><div id="equipped-items" class="equipped-items" aria-hidden="true"></div></div><div id="reward-status" role="status" aria-live="polite">Choose your first item!</div></div><div class="item-locker"><h3>Adventure Pack</h3><p>Higher scores unlock more items.</p><div id="reward-items" class="reward-items"></div></div></div></div>
+    <div class="modal-dialog reward-dialog"><button id="reward-close" class="modal-close" type="button" aria-label="Close">×</button><div class="reward-modal-heading"><div><span class="eyebrow">YOUR SCORE REWARD</span><h2 id="reward-title">Explorer Dress-Up!</h2><p id="reward-unlock-message"></p></div><button id="reward-reset" class="secondary-btn" type="button">↻ Start over</button></div><div class="reward-game"><div id="character-dropzone" class="character-dropzone" tabindex="0" aria-label="GP Friend dress-up stage"><span class="drop-hint">Tap or drag each unlocked item in order</span><div class="character-stage"><img id="reward-character" src="assets/dressup/week-1/gerry-base.webp" alt="Gerry ready for dress-up" loading="lazy" decoding="async" /><video id="reward-celebration-video" class="reward-video" playsinline preload="metadata" aria-label="Dress-up celebration animation" hidden></video></div><div id="reward-status" role="status" aria-live="polite">Choose your first item!</div><button id="reward-replay-clip" class="secondary-btn replay-clip" type="button" hidden>▶ Replay clip</button></div><div class="item-locker"><h3>Adventure Pack</h3><p>Higher scores unlock more items.</p><div id="reward-items" class="reward-items"></div></div></div></div>
   </div>
 
   <script src="assets/vendor/html2canvas.min.js"></script>

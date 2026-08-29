@@ -7,182 +7,282 @@ const weekData = {
   4: { title:'In the Cave', hero:'assets/weekly/week-4-card-hero.png', heroAlt:'Ria and Penny exploring a cave with a colorful bird' }
 };
 
+const w1 = 'assets/questions/week-1';
+const w2 = 'assets/questions/week-2';
+const w3 = 'assets/questions/week-3';
+const w4 = 'assets/questions/week-4';
+const picture = (src, alt) => ({type:'image',src,alt});
+const choice = (label, speech=label, extra={}) => ({label,speech,...extra});
+
+const week1Questions = [
+  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes t__l?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/tail.png`,'An elephant showing its tail'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'An elephant has a tail.'},
+  {section:'Phonics',position:2,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes r__n?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/rain.png`,'A child standing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'It is in the rain.'},
+  {section:'Phonics',position:3,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes spr__?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/spray.png`,'An elephant spraying water'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can spray water.'},
+  {section:'Phonics',position:4,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes pl__?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/play.png`,'An animal playing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can play in the rain.'},
+  {section:'Phonics',position:5,tag:'PICTURE WORD',icon:'🖼️',q:'What is this picture?',hint:'Choose the picture and word that match.',media:picture(`${w1}/phonics/rain.png`,'Rain falling around a child'),choices:[choice('rain','rain',{image:`${w1}/phonics/rain.png`,imageAlt:'Rain'}),choice('play','play',{image:`${w1}/phonics/play.png`,imageAlt:'Playing'})],answer:0,practice:'It is in the rain.'},
+
+  {section:'Sentences',position:6,tag:'DOG PARK RULE',icon:'🐕',q:'You ___ give your dog water.',hint:'Choose should or should not.',media:picture(`${w1}/literacy/give-dog-water.png`,'A child giving a dog water'),choices:[choice('should'),choice('should not')],answer:0,practice:'You should give your dog water.'},
+  {section:'Sentences',position:7,tag:'DOG PARK RULE',icon:'🐕',q:'You ___ hurt other dogs.',hint:'Choose should or should not.',media:picture(`${w1}/literacy/hurt-other-dogs.png`,'A dog hurting another dog'),choices:[choice('should'),choice('should not')],answer:1,practice:'You should not hurt other dogs.'},
+  {section:'Sentences',position:8,tag:'DOG PARK RULE',icon:'🐕',q:'You ___ play with your dog at the dog park.',hint:'Choose should or should not.',media:picture(`${w1}/literacy/play-with-your-dog.png`,'A child playing with a dog at the dog park'),choices:[choice('should'),choice('should not')],answer:0,practice:'You should play with your dog at the dog park.'},
+  {section:'Sentences',position:9,tag:'DOG PARK RULE',icon:'🐕',q:'You ___ use a leash when walking your dog.',hint:'Choose should or should not.',media:picture(`${w1}/literacy/use-a-leash.png`,'A child walking a dog with a leash'),choices:[choice('should'),choice('should not')],answer:0,practice:'You should use a leash when walking your dog.'},
+  {section:'Sentences',position:10,tag:'DOG PARK RULE',icon:'🐕',q:'You ___ let your dog chase people.',hint:'Choose should or should not.',media:picture(`${w1}/literacy/dog-chase-people.png`,'A dog chasing a person'),choices:[choice('should'),choice('should not')],answer:1,practice:'You should not let your dog chase people.'},
+
+  {section:'Reading',position:11,tag:'ANIMAL ACTION',icon:'📖',q:'What is the dog doing?',hint:'Choose the sentence that matches the picture.',media:picture(`${w1}/reading/dog-sitting.png`,'A dog sitting'),choices:[choice('The dog is sitting.'),choice('The dog is running.')],answer:0,practice:'The dog is sitting.'},
+  {section:'Reading',position:12,tag:'ANIMAL ACTION',icon:'📖',q:'What is the cat doing?',hint:'Choose the sentence that matches the picture.',media:picture(`${w1}/reading/cat-yawning.png`,'A cat yawning'),choices:[choice('The cat is yawning.'),choice('The cat is sleeping.')],answer:0,practice:'The cat is yawning.'},
+  {section:'Reading',position:13,tag:'ANIMAL ACTION',icon:'📖',q:'What is the deer doing?',hint:'Choose the sentence that matches the picture.',media:picture(`${w1}/reading/deer-walking.png`,'A deer walking'),choices:[choice('The deer is walking.'),choice('The deer is jumping.')],answer:0,practice:'The deer is walking.'},
+  {section:'Reading',position:14,tag:'ANIMAL ACTION',icon:'📖',q:'What is the rabbit doing?',hint:'Choose the sentence that matches the picture.',media:picture(`${w1}/reading/rabbit-jumping.png`,'A rabbit jumping'),choices:[choice('The rabbit is jumping.'),choice('The rabbit is sitting.')],answer:0,practice:'The rabbit is jumping.'},
+  {section:'Reading',position:15,tag:'ANIMAL ACTION',icon:'📖',q:'What is the eagle doing?',hint:'Choose the sentence that matches the picture.',media:picture(`${w1}/reading/eagle-hunting.png`,'An eagle hunting'),choices:[choice('The eagle is hunting.'),choice('The eagle is sleeping.')],answer:0,practice:'The eagle is hunting.'},
+
+  {section:'Math',position:16,tag:'AAB PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the AAB pattern.',media:{type:'pattern',tokens:['circle','circle','triangle','circle','circle','triangle','circle','circle','blank']},choices:[choice('Triangle','triangle',{tokens:['triangle']}),choice('Circle','circle',{tokens:['circle']})],answer:0,practice:'The next shape is a triangle.'},
+  {section:'Math',position:17,tag:'ABBB PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the ABBB pattern.',media:{type:'pattern',tokens:['circle','triangle','triangle','triangle','circle','triangle','triangle','blank']},choices:[choice('Triangle','triangle',{tokens:['triangle']}),choice('Circle','circle',{tokens:['circle']})],answer:0,practice:'The next shape is a triangle.'},
+  {section:'Math',position:18,tag:'AABB PATTERN',icon:'🔢',q:'Which two shapes come next?',hint:'Follow the AABB pattern.',media:{type:'pattern',tokens:['circle','circle','triangle','triangle','circle','circle','blank','blank']},choices:[choice('Two triangles','two triangles',{tokens:['triangle','triangle']}),choice('A circle and a triangle','a circle and a triangle',{tokens:['circle','triangle']})],answer:0,practice:'Two triangles come next.'},
+  {section:'Math',position:19,tag:'REPEATED ADDITION',icon:'➕',q:'Which multiplication sentence matches 1 + 1?',hint:'Count the equal groups of cats.',media:{type:'equation',animal:'cat',groups:[1,1],expression:'1 + 1'},choices:[choice('1 × 2','one times two',{animal:'cat',count:2}),choice('1 × 3','one times three',{animal:'cat',count:3})],answer:0,practice:'One plus one equals one times two.'},
+  {section:'Math',position:20,tag:'REPEATED ADDITION',icon:'✖️',q:'Which multiplication sentence matches 5 + 5?',hint:'Count the equal groups of bats.',media:{type:'equation',animal:'bat',groups:[5,5],expression:'5 + 5'},choices:[choice('5 × 2','five times two',{animal:'bat',count:10}),choice('4 × 2','four times two',{animal:'bat',count:8})],answer:0,practice:'Five plus five equals five times two.'}
+];
+
+const week2Questions = [
+  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes t__l?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/tail.png`,'An elephant showing its tail'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'An elephant has a tail.'},
+  {section:'Phonics',position:2,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes r__n?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/rain.png`,'A child standing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'It is in the rain.'},
+  {section:'Phonics',position:3,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes spr__?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/spray.png`,'An elephant spraying water'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can spray water.'},
+  {section:'Phonics',position:4,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes pl__?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/play.png`,'An animal playing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can play in the rain.'},
+  {section:'Phonics',position:5,tag:'PICTURE WORD',icon:'🖼️',q:'What is this picture?',hint:'Choose the picture and word that match.',media:picture(`${w2}/phonics/spray.png`,'An elephant spraying water'),choices:[choice('spray','spray',{image:`${w2}/phonics/spray.png`,imageAlt:'Spray'}),choice('rain','rain',{image:`${w2}/phonics/rain.png`,imageAlt:'Rain'})],answer:0,practice:'It can spray water.'},
+
+  {section:'Sentences',position:6,tag:'FIND OR FOUND',icon:'🌻',q:'I can ___ a butterfly in my garden.',hint:'Choose find or found.',media:picture(`${w2}/literacy/butterfly-in-garden.png`,'A butterfly in a garden'),choices:[choice('find'),choice('found')],answer:0,practice:'I can find a butterfly in my garden.'},
+  {section:'Sentences',position:7,tag:'FIND OR FOUND',icon:'🐌',q:'I ___ a small snail in my garden yesterday.',hint:'Choose find or found.',media:picture(`${w2}/literacy/small-snail-yesterday.png`,'A small snail found in a garden'),choices:[choice('find'),choice('found')],answer:1,practice:'I found a small snail in my garden yesterday.'},
+  {section:'Sentences',position:8,tag:'FIND OR FOUND',icon:'🌱',q:'I can ___ some short grass in my garden.',hint:'Choose find or found.',media:picture(`${w2}/literacy/short-grass-in-garden.png`,'Short grass in a garden'),choices:[choice('find'),choice('found')],answer:0,practice:'I can find some short grass in my garden.'},
+  {section:'Sentences',position:9,tag:'FIND OR FOUND',icon:'🦆',q:'I ___ a duck waddling in my garden last week.',hint:'Choose find or found.',media:picture(`${w2}/literacy/duck-waddling-last-week.png`,'A duck waddling in a garden'),choices:[choice('find'),choice('found')],answer:1,practice:'I found a duck waddling in my garden last week.'},
+  {section:'Sentences',position:10,tag:'FIND OR FOUND',icon:'🪺',q:'I ___ a bird nest in the tree yesterday.',hint:'Choose find or found.',media:picture(`${w2}/literacy/bird-nest-yesterday.png`,'A bird nest in a tree'),choices:[choice('find'),choice('found')],answer:1,practice:'I found a bird nest in the tree yesterday.'},
+
+  {section:'Reading',position:11,tag:'IN THE GARDEN',icon:'📖',q:'What can we find in the garden?',hint:'Choose the sentence that matches the picture.',media:picture(`${w2}/reading/small-snail.png`,'A small snail'),choices:[choice('I found a small snail.'),choice('I found a big tree.')],answer:0,practice:'I found a small snail.'},
+  {section:'Reading',position:12,tag:'IN THE GARDEN',icon:'📖',q:'What can we find in the garden?',hint:'Choose the sentence that matches the picture.',media:picture(`${w2}/reading/big-tree.png`,'A big tree'),choices:[choice('I found a big tree.'),choice('I found a tall fence.')],answer:0,practice:'I found a big tree.'},
+  {section:'Reading',position:13,tag:'IN THE GARDEN',icon:'📖',q:'What can we find in the garden?',hint:'Choose the sentence that matches the picture.',media:picture(`${w2}/reading/tall-fence.png`,'A tall fence'),choices:[choice('I found a tall fence.'),choice('I found some short grass.')],answer:0,practice:'I found a tall fence.'},
+  {section:'Reading',position:14,tag:'IN THE GARDEN',icon:'📖',q:'What can we find in the garden?',hint:'Choose the sentence that matches the picture.',media:picture(`${w2}/reading/short-grass.png`,'Some short grass'),choices:[choice('I found some short grass.'),choice('I found a big duck.')],answer:0,practice:'I found some short grass.'},
+  {section:'Reading',position:15,tag:'IN THE GARDEN',icon:'📖',q:'What can we find in the garden?',hint:'Choose the sentence that matches the picture.',media:picture(`${w2}/reading/big-duck.png`,'A big yellow duck'),choices:[choice('I found a big duck.'),choice('I found a small snail.')],answer:0,practice:'I found a big duck.'},
+
+  {section:'Math',position:16,tag:'AABC PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the AABC pattern.',media:{type:'pattern',tokens:['square','square','circle','triangle','square','square','circle','blank']},choices:[choice('Orange triangle','orange triangle',{tokens:['triangle']}),choice('Blue circle','blue circle',{tokens:['circle']})],answer:0,practice:'The next shape is an orange triangle.'},
+  {section:'Math',position:17,tag:'ABBC PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the ABBC pattern.',media:{type:'pattern',tokens:['square','circle','circle','triangle','square','circle','circle','blank']},choices:[choice('Orange triangle','orange triangle',{tokens:['triangle']}),choice('Red square','red square',{tokens:['square']})],answer:0,practice:'The next shape is an orange triangle.'},
+  {section:'Math',position:18,tag:'AABCC PATTERN',icon:'🔢',q:'Which two shapes come next?',hint:'Follow the AABCC pattern.',media:{type:'pattern',tokens:['square','square','circle','triangle','triangle','square','square','circle','blank','blank']},choices:[choice('Two orange triangles','two orange triangles',{tokens:['triangle','triangle']}),choice('A blue circle and an orange triangle','a blue circle and an orange triangle',{tokens:['circle','triangle']})],answer:0,practice:'Two orange triangles come next.'},
+  {section:'Math',position:19,tag:'REPEATED ADDITION',icon:'➕',q:'Which multiplication sentence matches 2 + 2 + 2?',hint:'Count the three equal groups of sunflowers.',media:{type:'equation',animal:'sunflower',groups:[2,2,2],expression:'2 + 2 + 2'},choices:[choice('2 × 3','two times three',{animal:'sunflower',count:6}),choice('2 × 2','two times two',{animal:'sunflower',count:4})],answer:0,practice:'Two plus two plus two equals two times three.'},
+  {section:'Math',position:20,tag:'REPEATED ADDITION',icon:'✖️',q:'Which multiplication sentence matches 4 + 4 + 4?',hint:'Count the three equal groups of pink flowers.',media:{type:'equation',animal:'pink flower',groups:[4,4,4],expression:'4 + 4 + 4'},choices:[choice('4 × 3','four times three',{animal:'pink flower',count:12}),choice('3 × 3','three times three',{animal:'pink flower',count:9})],answer:0,practice:'Four plus four plus four equals four times three.'}
+];
+
+const week3Questions = [
+  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes s__?',hint:'Look at the picture and complete the word.',media:picture(`${w3}/phonics/sea.png`,'The sea'),choices:[choice('ea','E A'),choice('ee','E E')],answer:0,practice:'Look at the sea.'},
+  {section:'Phonics',position:2,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes l__f?',hint:'Look at the picture and complete the word.',media:picture(`${w3}/phonics/leaf.png`,'A green leaf'),choices:[choice('ea','E A'),choice('ee','E E')],answer:0,practice:'Look at the leaf.'},
+  {section:'Phonics',position:3,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes b__?',hint:'Look at the picture and complete the word.',media:picture(`${w3}/phonics/bee.png`,'A bee'),choices:[choice('ea','E A'),choice('ee','E E')],answer:1,practice:'Look at the bee.'},
+  {section:'Phonics',position:4,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes tr__?',hint:'Look at the picture and complete the word.',media:picture(`${w3}/phonics/tree.png`,'A tree'),choices:[choice('ea','E A'),choice('ee','E E')],answer:1,practice:'He is in the tree.'},
+  {section:'Phonics',position:5,tag:'PICTURE WORD',icon:'🖼️',q:'What is this picture?',hint:'Choose the picture and word that match.',media:picture(`${w3}/phonics/bee.png`,'A bee'),choices:[choice('bee','bee',{image:`${w3}/phonics/bee.png`,imageAlt:'Bee'}),choice('tree','tree',{image:`${w3}/phonics/tree.png`,imageAlt:'Tree'})],answer:0,practice:'Look at the bee.'},
+
+  {section:'Sentences',position:6,tag:'ON OR BEHIND',icon:'🐒',q:'The monkey is ___ the tree.',hint:'Choose on or behind.',media:picture(`${w3}/literacy/monkey-on-tree.png`,'A monkey on a tree'),choices:[choice('on'),choice('behind')],answer:0,practice:'The monkey is on the tree.'},
+  {section:'Sentences',position:7,tag:'ON OR BEHIND',icon:'🐍',q:'The snake is ___ the leaves.',hint:'Choose on or behind.',media:picture(`${w3}/literacy/snake-behind-leaves.png`,'A snake behind leaves'),choices:[choice('on'),choice('behind')],answer:1,practice:'The snake is behind the leaves.'},
+  {section:'Sentences',position:8,tag:'ON OR BEHIND',icon:'🦜',q:'The parrot is ___ the branch.',hint:'Choose on or behind.',media:picture(`${w3}/literacy/parrot-on-branch.png`,'A parrot on a branch'),choices:[choice('on'),choice('behind')],answer:0,practice:'The parrot is on the branch.'},
+  {section:'Sentences',position:9,tag:'ON OR BEHIND',icon:'🦒',q:'The giraffe is ___ the rocks.',hint:'Choose on or behind.',media:picture(`${w3}/literacy/giraffe-behind-rocks.png`,'A giraffe behind rocks'),choices:[choice('on'),choice('behind')],answer:1,practice:'The giraffe is behind the rocks.'},
+  {section:'Sentences',position:10,tag:'ON OR BEHIND',icon:'🐍',q:'The snake is ___ the tree.',hint:'Choose on or behind.',media:picture(`${w3}/literacy/snake-on-tree.png`,'A snake on a tree'),choices:[choice('on'),choice('behind')],answer:0,practice:'The snake is on the tree.'},
+
+  {section:'Reading',position:11,tag:'STORY WORD',icon:'📖',q:'The little monkey copies his ___.',hint:'Look at the story picture and choose one word.',media:picture(`${w3}/reading/q1-older-brother.png`,'A little monkey copying his older brother'),choices:[choice('brother'),choice('parrot')],answer:0,practice:'The little monkey copies his older brother.'},
+  {section:'Reading',position:12,tag:'STORY WORD',icon:'📖',q:'The little monkey cannot see the ___.',hint:'Look at the story picture and choose one word.',media:picture(`${w3}/reading/q2-snakes.png`,'Snakes hidden near the little monkey'),choices:[choice('snakes'),choice('tiger')],answer:0,practice:'The little monkey cannot see the snakes at first.'},
+  {section:'Reading',position:13,tag:'STORY WORD',icon:'📖',q:'The snakes are ___ the monkeys.',hint:'Look at the story picture and choose one word.',media:picture(`${w3}/reading/q3-all-around.png`,'Snakes all around the monkeys'),choices:[choice('around'),choice('inside')],answer:0,practice:'The snakes are all around the monkeys.'},
+  {section:'Reading',position:14,tag:'STORY & LITERACY',icon:'📖',q:'The snake is ___ the leaves.',hint:'Look at the picture and choose one word.',media:picture(`${w3}/reading/snake-behind-leaves.png`,'A snake behind leaves'),choices:[choice('behind'),choice('on')],answer:0,practice:'The snake is behind the leaves.'},
+  {section:'Reading',position:15,tag:'STORY & LITERACY',icon:'📖',q:'The parrot is ___ the branch.',hint:'Look at the picture and choose one word.',media:picture(`${w3}/reading/parrot-on-branch.png`,'A parrot on a branch'),choices:[choice('on'),choice('behind')],answer:0,practice:'The parrot is on the branch.'},
+
+  {section:'Math',position:16,tag:'ABCD PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the ABCD pattern.',media:{type:'pattern',tokens:['square','circle','triangle','star','square','circle','triangle','blank']},choices:[choice('Green star','green star',{tokens:['star']}),choice('Red square','red square',{tokens:['square']})],answer:0,practice:'The next shape is a green star.'},
+  {section:'Math',position:17,tag:'AABCD PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the AABCD pattern.',media:{type:'pattern',tokens:['square','square','circle','triangle','star','square','square','circle','triangle','blank']},choices:[choice('Green star','green star',{tokens:['star']}),choice('Blue circle','blue circle',{tokens:['circle']})],answer:0,practice:'The next shape is a green star.'},
+  {section:'Math',position:18,tag:'ABCDD PATTERN',icon:'🔢',q:'Which two shapes come next?',hint:'Follow the ABCDD pattern.',media:{type:'pattern',tokens:['square','circle','triangle','star','star','square','circle','triangle','blank','blank']},choices:[choice('Two green stars','two green stars',{tokens:['star','star']}),choice('A green star and a red square','a green star and a red square',{tokens:['star','square']})],answer:0,practice:'Two green stars come next.'},
+  {section:'Math',position:19,tag:'REPEATED ADDITION',icon:'➕',q:'Which multiplication sentence matches 3 + 3 + 3 + 3?',hint:'Count the four equal groups of dogs.',media:{type:'equation',animal:'yard dog',groups:[3,3,3,3],expression:'3 + 3 + 3 + 3'},choices:[choice('3 × 4','three times four',{animal:'yard dog',count:12}),choice('3 × 3','three times three',{animal:'yard dog',count:9})],answer:0,practice:'Three plus three plus three plus three equals three times four.'},
+  {section:'Math',position:20,tag:'REPEATED ADDITION',icon:'✖️',q:'Which multiplication sentence matches 4 + 4 + 4 + 4?',hint:'Count the four equal groups of owls.',media:{type:'equation',animal:'owl',groups:[4,4,4,4],expression:'4 + 4 + 4 + 4'},choices:[choice('4 × 4','four times four',{animal:'owl',count:16}),choice('4 × 3','four times three',{animal:'owl',count:12})],answer:0,practice:'Four plus four plus four plus four equals four times four.'}
+];
+
+const week4Questions = [
+  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes s__?',hint:'Look at the picture and complete the word.',media:picture(`${w4}/phonics/sea.png`,'The sea'),choices:[choice('ea','E A'),choice('ee','E E')],answer:0,practice:'Look at the sea.'},
+  {section:'Phonics',position:2,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes l__f?',hint:'Look at the picture and complete the word.',media:picture(`${w4}/phonics/leaf.png`,'A green leaf'),choices:[choice('ea','E A'),choice('ee','E E')],answer:0,practice:'Look at the leaf.'},
+  {section:'Phonics',position:3,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes b__?',hint:'Look at the picture and complete the word.',media:picture(`${w4}/phonics/bee.png`,'A bee'),choices:[choice('ea','E A'),choice('ee','E E')],answer:1,practice:'Look at the bee.'},
+  {section:'Phonics',position:4,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes tr__?',hint:'Look at the picture and complete the word.',media:picture(`${w4}/phonics/tree.png`,'A tree'),choices:[choice('ea','E A'),choice('ee','E E')],answer:1,practice:'He is in the tree.'},
+  {section:'Phonics',position:5,tag:'PICTURE WORD',icon:'🖼️',q:'What is this picture?',hint:'Choose the picture and word that match.',media:picture(`${w4}/phonics/tree.png`,'A tree'),choices:[choice('tree','tree',{image:`${w4}/phonics/tree.png`,imageAlt:'Tree'}),choice('bee','bee',{image:`${w4}/phonics/bee.png`,imageAlt:'Bee'})],answer:0,practice:'He is in the tree.'},
+
+  {section:'Sentences',position:6,tag:'SCARY OR SCARED',icon:'🐀',q:'The gray rat is ___.',hint:'Choose scary or scared.',media:picture(`${w4}/literacy/gray-rat-scary.png`,'A scary gray rat'),choices:[choice('scary'),choice('scared')],answer:0,practice:'The gray rat is scary.'},
+  {section:'Sentences',position:7,tag:'SCARY OR SCARED',icon:'🦅',q:'The boy is ___ of the eagle.',hint:'Choose scary or scared.',media:picture(`${w4}/literacy/boy-scared-of-eagle.png`,'A boy who is scared of an eagle'),choices:[choice('scary'),choice('scared')],answer:1,practice:'The boy is scared of the eagle.'},
+  {section:'Sentences',position:8,tag:'SCARY OR SCARED',icon:'🕷️',q:'The big black spider is ___.',hint:'Choose scary or scared.',media:picture(`${w4}/literacy/black-spider-scary.png`,'A scary big black spider'),choices:[choice('scary'),choice('scared')],answer:0,practice:'The big black spider is scary.'},
+  {section:'Sentences',position:9,tag:'SCARY OR SCARED',icon:'🐦',q:'The bird is ___ of the people.',hint:'Choose scary or scared.',media:picture(`${w4}/literacy/bird-scared-of-people.png`,'A bird that is scared of people'),choices:[choice('scary'),choice('scared')],answer:1,practice:'The bird is scared of the people.'},
+  {section:'Sentences',position:10,tag:'SCARY OR SCARED',icon:'🦅',q:'The eagle is ___.',hint:'Choose scary or scared.',media:picture(`${w4}/literacy/eagle-scary.png`,'A scary eagle'),choices:[choice('scary'),choice('scared')],answer:0,practice:'The eagle is scary.'},
+
+  {section:'Reading',position:11,tag:'STORY WORD',icon:'📖',q:'The rat wants the birds’ ___.',hint:'Look at the story picture and choose one word.',media:picture(`${w4}/reading/q1-eggs.webp`,'A rat looking for the birds’ eggs'),choices:[choice('eggs'),choice('leaves')],answer:0,practice:'The rat wants the birds’ eggs.'},
+  {section:'Reading',position:12,tag:'STORY WORD',icon:'📖',q:'Mommy Bird is scared of the ___.',hint:'Look at the story picture and choose one word.',media:picture(`${w4}/reading/q2-eagle.webp`,'Mommy Bird is scared of an eagle'),choices:[choice('eagle'),choice('spider')],answer:0,practice:'Mommy Bird is scared of the eagle.'},
+  {section:'Reading',position:13,tag:'STORY WORD',icon:'📖',q:'The spider’s web ___ the birds.',hint:'Look at the story picture and choose one word.',media:picture(`${w4}/reading/q3-web-warning.webp`,'A spider web warning the birds'),choices:[choice('warns'),choice('wraps')],answer:0,practice:'The spider’s web warns the birds that the rat is coming.'},
+  {section:'Reading',position:14,tag:'STORY SAFETY',icon:'📖',q:'When you feel scared, you should ___.',hint:'Choose the safe answer.',media:picture(`${w4}/reading/q4-tell-grownup.webp`,'A child telling a trusted grown-up'),choices:[choice('tell a grown-up'),choice('keep it secret')],answer:0,practice:'Tell a trusted grown-up when you feel scared.'},
+  {section:'Reading',position:15,tag:'STORY & LITERACY',icon:'📖',q:'The bird feels ___.',hint:'Look at the picture and choose one word.',media:picture(`${w4}/reading/bird-scared-of-people.png`,'A bird that feels scared'),choices:[choice('scared'),choice('scary')],answer:0,practice:'The bird feels scared.'},
+
+  {section:'Math',position:16,tag:'ABCC PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the ABCC pattern.',media:{type:'pattern',tokens:['circle','square','circle','circle','circle','square','circle','blank']},choices:[choice('Blue circle','blue circle',{tokens:['circle']}),choice('Red square','red square',{tokens:['square']})],answer:0,practice:'The next shape is a blue circle.'},
+  {section:'Math',position:17,tag:'AABC PATTERN',icon:'🔢',q:'What comes next in the pattern?',hint:'Follow the AABC pattern.',media:{type:'pattern',tokens:['square','square','circle','triangle','square','square','circle','blank']},choices:[choice('Orange triangle','orange triangle',{tokens:['triangle']}),choice('Blue circle','blue circle',{tokens:['circle']})],answer:0,practice:'The next shape is an orange triangle.'},
+  {section:'Math',position:18,tag:'ABCDC PATTERN',icon:'🔢',q:'Which two shapes come next?',hint:'Follow the ABCDC pattern.',media:{type:'pattern',tokens:['triangle','square','circle','star','circle','triangle','square','circle','blank','blank']},choices:[choice('A green star and a blue circle','a green star and a blue circle',{tokens:['star','circle']}),choice('A blue circle and a green star','a blue circle and a green star',{tokens:['circle','star']})],answer:0,practice:'A green star and a blue circle come next.'},
+  {section:'Math',position:19,tag:'REPEATED ADDITION',icon:'➕',q:'Which multiplication sentence matches 4 + 4 + 4?',hint:'Count the three equal groups of caterpillars.',media:{type:'equation',animal:'caterpillar',groups:[4,4,4],expression:'4 + 4 + 4'},choices:[choice('4 × 3','four times three',{animal:'caterpillar',count:12}),choice('4 × 2','four times two',{animal:'caterpillar',count:8})],answer:0,practice:'Four plus four plus four equals four times three.'},
+  {section:'Math',position:20,tag:'REPEATED ADDITION',icon:'✖️',q:'Which multiplication sentence matches 5 + 5 + 5 + 5?',hint:'Count the four equal groups of ghosts.',media:{type:'equation',animal:'ghost',groups:[5,5,5,5],expression:'5 + 5 + 5 + 5'},choices:[choice('5 × 4','five times four',{animal:'ghost',count:20}),choice('5 × 3','five times three',{animal:'ghost',count:15})],answer:0,practice:'Five plus five plus five plus five equals five times four.'}
+];
+
 const sampleQuestionSets = {
-  1: [
-    {section:'Phonics',position:1,tag:'SOUND TRAIL',icon:'🔤',q:'Which word has the ai vowel team?',hint:'Listen, then choose the best answer.',choices:['rain','tree'],answer:0,practice:'It is in the rain.'},
-    {section:'Sentences',position:6,tag:'PARK RULE',icon:'🌳',q:'Choose the correct dog park sentence.',hint:'Think about a safe and caring choice.',choices:['You should give your dog water.','You should hurt other dogs.'],answer:0,practice:'You should give your dog water.'},
-    {section:'Reading',position:11,tag:'ANIMAL ACTION',icon:'🐕',q:'What is the dog doing?',hint:'Choose the sentence that matches the action.',choices:['The dog is sitting.','The dog is flying.'],answer:0,practice:'The dog is sitting.'},
-    {section:'Math',position:16,tag:'MATH TRAIL',icon:'🔢',q:'Your Week 1 Math question will appear here.',hint:'This temporary card shows the Math interface only.',choices:['Math answer choice','Another answer choice'],answer:0,practice:'Your Math practice sentence will appear here.',placeholder:true}
+  2:[
+    {section:'Phonics',position:1,tag:'SOUND TRAIL',icon:'🔤',q:'Which word ends with the ay vowel team?',hint:'Listen, then choose the best answer.',choices:[choice('play'),choice('leaf')],answer:0,practice:'It can play in the rain.'},
+    {section:'Sentences',position:6,tag:'GARDEN GRAMMAR',icon:'🌻',q:'Choose the correct word: I can ___ a butterfly.',hint:'Choose the word that completes the sentence.',choices:[choice('find'),choice('found')],answer:0,practice:'I can find a butterfly in my garden.'},
+    {section:'Reading',position:11,tag:'GARDEN READING',icon:'🦆',q:'Which sentence describes the picture lesson?',hint:'Remember the garden description activity.',choices:[choice('The grass is short.'),choice('The grass is flying.')],answer:0,practice:'The grass is short.'},
+    {section:'Math',position:16,tag:'MATH TRAIL',icon:'🔢',q:'Your Week 2 Math question will appear here.',hint:'This temporary card shows the interface only.',choices:[choice('First choice'),choice('Second choice')],answer:0,practice:'Week 2 content is waiting for approval.',placeholder:true}
   ],
-  2: [
-    {section:'Phonics',position:1,tag:'SOUND TRAIL',icon:'🔤',q:'Which word ends with the ay vowel team?',hint:'Listen, then choose the best answer.',choices:['play','leaf'],answer:0,practice:'It can play in the rain.'},
-    {section:'Sentences',position:6,tag:'GARDEN GRAMMAR',icon:'🌻',q:'Choose the correct word: I can ___ a butterfly.',hint:'Use find for something you can see now.',choices:['find','found'],answer:0,practice:'I can find a butterfly in my garden.'},
-    {section:'Reading',position:11,tag:'GARDEN READING',icon:'🦆',q:'Which sentence describes the picture lesson?',hint:'Remember the garden description activity.',choices:['The grass is short.','The grass is flying.'],answer:0,practice:'The grass is short.'},
-    {section:'Math',position:16,tag:'MATH TRAIL',icon:'🔢',q:'Your Week 2 Math question will appear here.',hint:'This temporary card shows the Math interface only.',choices:['Math answer choice','Another answer choice'],answer:0,practice:'Your Math practice sentence will appear here.',placeholder:true}
+  3:[
+    {section:'Phonics',position:1,tag:'SOUND TRAIL',icon:'🔤',q:'Which word has the ee vowel team?',hint:'Listen, then choose the best answer.',choices:[choice('tree'),choice('rain')],answer:0,practice:'He is in the tree.'},
+    {section:'Sentences',position:6,tag:'LOCATION CLUE',icon:'🐍',q:'Complete the sentence: The snake is ___ the leaves.',hint:'Choose the location word.',choices:[choice('behind'),choice('on')],answer:0,practice:'The snake is behind the leaves.'},
+    {section:'Reading',position:11,tag:'JUNGLE READING',icon:'🦜',q:'Which is a safe jungle choice?',hint:'Remember the jungle rules activity.',choices:[choice('You should stay on the path.'),choice('You should shout and scream.')],answer:0,practice:'You should stay on the path.'},
+    {section:'Math',position:16,tag:'MATH TRAIL',icon:'🔢',q:'Your Week 3 Math question will appear here.',hint:'This temporary card shows the interface only.',choices:[choice('First choice'),choice('Second choice')],answer:0,practice:'Week 3 content is waiting for approval.',placeholder:true}
   ],
-  3: [
-    {section:'Phonics',position:1,tag:'SOUND TRAIL',icon:'🔤',q:'Which word has the ee vowel team?',hint:'Listen, then choose the best answer.',choices:['tree','rain'],answer:0,practice:'He is in the tree.'},
-    {section:'Sentences',position:6,tag:'LOCATION CLUE',icon:'🐍',q:'Complete the sentence: The snake is ___ the leaves.',hint:'Choose the word that means hidden at the back.',choices:['behind','on'],answer:0,practice:'The snake is behind the leaves.'},
-    {section:'Reading',position:11,tag:'JUNGLE READING',icon:'🦜',q:'Which is a safe jungle choice?',hint:'Remember the jungle rules activity.',choices:['You should stay on the path.','You should shout and scream.'],answer:0,practice:'You should stay on the path.'},
-    {section:'Math',position:16,tag:'MATH TRAIL',icon:'🔢',q:'Your Week 3 Math question will appear here.',hint:'This temporary card shows the Math interface only.',choices:['Math answer choice','Another answer choice'],answer:0,practice:'Your Math practice sentence will appear here.',placeholder:true}
-  ],
-  4: [
-    {section:'Phonics',position:1,tag:'SOUND TRAIL',icon:'🔤',q:'Which word has the ea vowel team?',hint:'Listen, then choose the best answer.',choices:['leaf','play'],answer:0,practice:'Look at the leaf.'},
-    {section:'Sentences',position:6,tag:'FEELING WORD',icon:'🐦',q:'Complete the sentence: The bird is ___ of the eagle.',hint:'Scared describes how someone feels.',choices:['scared','scary'],answer:0,practice:'The bird is scared of the eagle.'},
-    {section:'Reading',position:11,tag:'BIRD PARK RULE',icon:'🔭',q:'Which is a good way to watch birds?',hint:'Remember the bird park safety activity.',choices:['You should use binoculars.','You should touch bird nests.'],answer:0,practice:'You should use binoculars to watch birds.'},
-    {section:'Math',position:16,tag:'MATH TRAIL',icon:'🔢',q:'Your Week 4 Math question will appear here.',hint:'This temporary card shows the Math interface only.',choices:['Math answer choice','Another answer choice'],answer:0,practice:'Your Math practice sentence will appear here.',placeholder:true}
+  4:[
+    {section:'Phonics',position:1,tag:'SOUND TRAIL',icon:'🔤',q:'Which word has the ea vowel team?',hint:'Listen, then choose the best answer.',choices:[choice('leaf'),choice('play')],answer:0,practice:'Look at the leaf.'},
+    {section:'Sentences',position:6,tag:'FEELING WORD',icon:'🐦',q:'Complete the sentence: The bird is ___ of the eagle.',hint:'Choose the feeling word.',choices:[choice('scared'),choice('scary')],answer:0,practice:'The bird is scared of the eagle.'},
+    {section:'Reading',position:11,tag:'BIRD PARK RULE',icon:'🔭',q:'Which is a good way to watch birds?',hint:'Remember the bird park safety activity.',choices:[choice('You should use binoculars.'),choice('You should touch bird nests.')],answer:0,practice:'You should use binoculars to watch birds.'},
+    {section:'Math',position:16,tag:'MATH TRAIL',icon:'🔢',q:'Your Week 4 Math question will appear here.',hint:'This temporary card shows the interface only.',choices:[choice('First choice'),choice('Second choice')],answer:0,practice:'Week 4 content is waiting for approval.',placeholder:true}
   ]
 };
 
-const sectionMeta = {
-  Phonics:{start:1,tag:'SOUND TRAIL',icon:'🔤'},
-  Sentences:{start:6,tag:'KEY SENTENCE TRAIL',icon:'💬'},
-  Reading:{start:11,tag:'READING TRAIL',icon:'📖'},
-  Math:{start:16,tag:'MATH TRAIL',icon:'🔢'}
-};
+const sectionMeta = {Phonics:{start:1,tag:'SOUND TRAIL',icon:'🔤'},Sentences:{start:6,tag:'KEY SENTENCE TRAIL',icon:'💬'},Reading:{start:11,tag:'READING TRAIL',icon:'📖'},Math:{start:16,tag:'MATH TRAIL',icon:'🔢'}};
+function buildPreviewWeek(samples){return Object.entries(sectionMeta).flatMap(([section,meta])=>{const sample=samples.find(item=>item.section===section);return Array.from({length:5},(_,index)=>index===0?{...sample,position:meta.start}:{section,position:meta.start+index,tag:meta.tag,icon:meta.icon,q:`${section} question ${index+1} is waiting for the approved lesson.`,hint:'This slot is reserved for the matching weekly lesson.',choices:[choice('Continue'),choice('Come back later')],answer:0,practice:'Curriculum content will be added after approval.',pending:true});});}
 
-function buildPreviewWeek(samples){
-  return Object.entries(sectionMeta).flatMap(([section,meta])=>{
-    const sample=samples.find(item=>item.section===section);
-    return Array.from({length:5},(_,index)=>index===0
-      ? {...sample,position:meta.start}
-      : {
-          section,
-          position:meta.start+index,
-          tag:meta.tag,
-          icon:meta.icon,
-          q:`${section} question ${index+1} is waiting for the approved lesson.`,
-          hint:'This slot is reserved so the full 20-question journey can be tested safely.',
-          choices:['Continue the interface preview'],
-          answer:null,
-          practice:'Curriculum content will be added here after approval.',
-          pending:true
-        });
+const questionSets={1:week1Questions,2:week2Questions,3:week3Questions,4:week4Questions};
+const sectionColors={Phonics:'#ec6c8c',Sentences:'#e9ad3e',Reading:'#4b94ce',Math:'#50a66b'};
+const animalAssets={cat:`${w1}/math/cat.png`,bat:`${w1}/math/bat.png`,sunflower:`${w2}/math/sunflower-3d.png`,'pink flower':`${w2}/math/pink-flower-3d.png`,'yard dog':`${w3}/math/dog-3d.png`,owl:`${w3}/math/owl-3d.png`,caterpillar:`${w4}/math/caterpillar-3d.png`,ghost:`${w4}/math/ghost-3d.png`};
+const shapeAssets={circle:`${w1}/math/pattern-circle-3d.png`,triangle:`${w1}/math/pattern-triangle-3d.png`,square:`${w2}/math/pattern-square-3d.png`,star:`${w3}/math/pattern-star-3d.png`};
+const rewardConfigs={
+  1:{cardTitle:"Gerry’s Puppy Park Hero",resultTitle:"My Puppy Park Hero Look",modalTitle:"Puppy Park Hero Gerry!",characterAlt:"Gerry ready for his puppy park dress-up",stages:["assets/dressup/week-1/gerry-base.webp","assets/dressup/week-1/gerry-stage-1.webp","assets/dressup/week-1/gerry-stage-2.webp","assets/dressup/week-1/gerry-stage-3.webp","assets/dressup/week-1/gerry-stage-4.webp"],items:[
+    {key:"whistle",name:"Paw Adventure Whistle",label:"Adventure Whistle",image:"assets/dressup/week-1/item-paw-adventure-whistle.webp",alt:"Colorful Paw Adventure Whistle"},
+    {key:"backpack",name:"Puppy Helper Backpack",label:"Helper Backpack",image:"assets/dressup/week-1/item-puppy-helper-backpack.webp",alt:"Colorful Puppy Helper Backpack"},
+    {key:"heroOutfit",name:"Dog Park Hero Outfit",label:"Hero Outfit",image:"assets/dressup/week-1/item-dog-park-hero-outfit.webp",alt:"Bright Dog Park Hero Outfit"},
+    {key:"frisbee",name:"Golden Champion Paw Frisbee",label:"Golden Paw Frisbee",image:"assets/dressup/week-1/item-golden-champion-paw-frisbee.webp",alt:"Sparkling Golden Champion Paw Frisbee"}
+  ],unlockLabels:["the Paw Adventure Whistle","the whistle and Puppy Helper Backpack","the whistle, backpack, and Dog Park Hero Outfit","Gerry’s complete Puppy Park Hero look"],clips:["assets/videos/C-M7-1-1.mp4","assets/videos/C-M7-1-2.mp4","assets/videos/C-M7-1-3.mp4","assets/videos/C-M7-1-4.mp4"]},
+  2:{cardTitle:"Penny’s Duck Pond Explorer",resultTitle:"My Duck Pond Explorer Look",modalTitle:"Duck Pond Explorer Penny!",characterAlt:"Penny ready for her duck pond dress-up",stages:["assets/dressup/week-2/penny-base.webp","assets/dressup/week-2/penny-stage-1.webp","assets/dressup/week-2/penny-stage-2.webp","assets/dressup/week-2/penny-stage-3.webp","assets/dressup/week-2/penny-stage-4.webp"],items:[
+    {key:"rainHat",name:"Daisy Duck Rain Hat",label:"Duck Rain Hat",image:"assets/dressup/week-2/item-daisy-duck-rain-hat.webp",alt:"Yellow Daisy Duck Rain Hat"},
+    {key:"adventureSet",name:"Duckling Adventure Set",label:"Adventure Set",image:"assets/dressup/week-2/item-duckling-adventure-set.webp",alt:"Duckling adventure boots and sling bag set"},
+    {key:"pondOutfit",name:"Duck Pond Explorer Outfit",label:"Explorer Outfit",image:"assets/dressup/week-2/item-duck-pond-explorer-outfit.webp",alt:"Bright Duck Pond Explorer Outfit"},
+    {key:"umbrella",name:"Golden Duck Umbrella",label:"Golden Umbrella",image:"assets/dressup/week-2/item-golden-duck-umbrella.webp",alt:"Sparkling Golden Duck Umbrella"}
+  ],unlockLabels:["the Daisy Duck Rain Hat","the rain hat and Duckling Adventure Set","the hat, adventure set, and Duck Pond Explorer Outfit","Penny’s complete Duck Pond Explorer look"],clips:["assets/videos/C-M7-2-1.mp4","assets/videos/C-M7-2-2.mp4","assets/videos/C-M7-2-3.mp4","assets/videos/C-M7-2-4.mp4"]},
+  3:{cardTitle:"Don’s Snake Safari Ranger",resultTitle:"My Snake Safari Ranger Look",modalTitle:"Snake Safari Ranger Don!",characterAlt:"Don ready for his snake safari dress-up",stages:["assets/dressup/week-3/don-base.webp","assets/dressup/week-3/don-stage-1.webp","assets/dressup/week-3/don-stage-2.webp","assets/dressup/week-3/don-stage-3.webp","assets/dressup/week-3/don-stage-4.webp"],items:[
+    {key:"binoculars",name:"Snake Spotter Binoculars",label:"Spotter Binoculars",image:"assets/dressup/week-3/item-snake-spotter-binoculars.webp",alt:"Colorful Snake Spotter Binoculars"},
+    {key:"trailSet",name:"Backyard Trail Set",label:"Backyard Trail Set",image:"assets/dressup/week-3/item-backyard-trail-set.webp",alt:"Backyard snake safari trail set"},
+    {key:"rangerOutfit",name:"Snake Safari Ranger Outfit",label:"Ranger Outfit",image:"assets/dressup/week-3/item-snake-safari-ranger-outfit.webp",alt:"Bright Snake Safari Ranger Outfit"},
+    {key:"serpentStaff",name:"Golden Serpent Discovery Staff",label:"Golden Serpent Staff",image:"assets/dressup/week-3/item-golden-serpent-discovery-staff.webp",alt:"Jeweled Golden Serpent Discovery Staff"}
+  ],unlockLabels:["the Snake Spotter Binoculars","the binoculars and Backyard Trail Set","the binoculars, trail set, and Snake Safari Ranger Outfit","Don’s complete Snake Safari Ranger look"],clips:["assets/videos/C-M7-3-1.mp4","assets/videos/C-M7-3-2.mp4","assets/videos/C-M7-3-3.mp4","assets/videos/C-M7-3-4.mp4"]},
+  4:{cardTitle:"Ria’s Crystal Cave Birdwatcher",resultTitle:"My Crystal Cave Birdwatcher Look",modalTitle:"Crystal Cave Birdwatcher Ria!",characterAlt:"Ria ready for her crystal cave birdwatcher dress-up",stages:["assets/dressup/week-4/ria-base.webp","assets/dressup/week-4/ria-stage-1.webp","assets/dressup/week-4/ria-stage-2.webp","assets/dressup/week-4/ria-stage-3.webp","assets/dressup/week-4/ria-stage-4.webp"],items:[
+    {key:"headlamp",name:"Crystal Cave Headlamp",label:"Crystal Headlamp",image:"assets/dressup/week-4/item-crystal-cave-headlamp.webp",alt:"Sparkling Crystal Cave Headlamp"},
+    {key:"trailSet",name:"Gemstone Trail Set",label:"Gemstone Trail Set",image:"assets/dressup/week-4/item-gemstone-trail-set.webp",alt:"Colorful Gemstone Trail Set"},
+    {key:"birdwatcherOutfit",name:"Crystal Cave Birdwatcher Outfit",label:"Birdwatcher Outfit",image:"assets/dressup/week-4/item-crystal-cave-birdwatcher-outfit.webp",alt:"Bright Crystal Cave Birdwatcher Outfit without a backpack"},
+    {key:"rainbowWings",name:"Golden Rainbow Bird Wings",label:"Golden Bird Wings",image:"assets/dressup/week-4/item-golden-rainbow-bird-wings.webp",alt:"Sparkling Golden Rainbow Bird Wings"}
+  ],unlockLabels:["the Crystal Cave Headlamp","the headlamp and Gemstone Trail Set","the headlamp, trail set, and Crystal Cave Birdwatcher Outfit","Ria’s complete Crystal Cave Birdwatcher look"],clips:["assets/videos/C-M7-4-1.mp4","assets/videos/C-M7-4-2.mp4","assets/videos/C-M7-4-3.mp4","assets/videos/C-M7-4-4.mp4"]}
+};
+let activeWeek=1,student='Explorer',questions=questionSets[1],current=0,answers=[],displayedChoices=[];
+let reportBlob=null,reportUrl='';
+let audioContext=null,answerFxAudio=null,answerFxTimer=null;
+let lastScore=0,rewardApplied=0,rewardCompletedLevel=0,rewardInitialized=false,rewardClipTimer=null;
+
+function showScreen(id){document.querySelectorAll('.screen').forEach(screen=>screen.classList.toggle('active',screen.id===id));window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+function speak(text){if(!text||!('speechSynthesis'in window))return;speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text.replace(/___/g,'blank').replace(/__/g,'blank'));utterance.lang='en-US';utterance.rate=.86;utterance.pitch=1.03;const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>v.lang==='en-US'&&/Samantha|Jenny|Aria|Ava|Google US English/i.test(v.name))||voices.find(v=>v.lang==='en-US')||null;speechSynthesis.speak(utterance);}
+function playButtonClick(){
+  try{
+    audioContext=audioContext||new (window.AudioContext||window.webkitAudioContext)();
+    if(audioContext.state==='suspended')audioContext.resume();
+    const start=audioContext.currentTime,master=audioContext.createGain();
+    master.gain.setValueAtTime(1.35,start);master.connect(audioContext.destination);
+    const pop=audioContext.createOscillator(),popGain=audioContext.createGain();
+    pop.type='sine';pop.frequency.setValueAtTime(220,start);pop.frequency.exponentialRampToValueAtTime(620,start+.095);pop.frequency.exponentialRampToValueAtTime(470,start+.15);
+    popGain.gain.setValueAtTime(.0001,start);popGain.gain.exponentialRampToValueAtTime(.24,start+.01);popGain.gain.exponentialRampToValueAtTime(.0001,start+.17);
+    pop.connect(popGain);popGain.connect(master);pop.start(start);pop.stop(start+.18);
+    [{frequency:740,delay:.045,volume:.075},{frequency:980,delay:.092,volume:.065},{frequency:1320,delay:.138,volume:.055}].forEach(({frequency,delay,volume})=>{
+      const note=audioContext.createOscillator(),gain=audioContext.createGain(),noteStart=start+delay;
+      note.type='triangle';note.frequency.setValueAtTime(frequency,noteStart);note.frequency.exponentialRampToValueAtTime(frequency*1.08,noteStart+.07);
+      gain.gain.setValueAtTime(.0001,noteStart);gain.gain.exponentialRampToValueAtTime(volume,noteStart+.008);gain.gain.exponentialRampToValueAtTime(.0001,noteStart+.095);
+      note.connect(gain);gain.connect(master);note.start(noteStart);note.stop(noteStart+.105);
+    });
+  }catch(error){/* The interface still works if the browser blocks Web Audio. */}
+}
+function stopAnswerFx(){if(answerFxTimer){clearTimeout(answerFxTimer);answerFxTimer=null;}if(answerFxAudio){answerFxAudio.pause();answerFxAudio.currentTime=0;answerFxAudio=null;}}
+function playAnswerSound(kind){
+  stopAnswerFx();
+  const audio=new Audio(`assets/audio/fx/${kind}-answer.mp3`);answerFxAudio=audio;audio.volume=.9;
+  return new Promise(resolve=>{
+    let finished=false;
+    const finish=()=>{if(finished)return;finished=true;if(answerFxTimer){clearTimeout(answerFxTimer);answerFxTimer=null;}if(answerFxAudio===audio)answerFxAudio=null;resolve();};
+    audio.onended=finish;audio.onerror=finish;
+    if(kind==='correct'){
+      audio.onloadedmetadata=()=>{
+        const trimStart=.25,trimEnd=.75;audio.playbackRate=2;audio.preservesPitch=true;audio.currentTime=Math.min(trimStart,Math.max(0,audio.duration-.1));
+        answerFxTimer=setTimeout(()=>{audio.pause();finish();},Math.max(.1,audio.duration-trimStart-trimEnd)/audio.playbackRate*1000);
+        audio.play().catch(finish);
+      };
+      audio.load();
+    }else audio.play().catch(finish);
   });
 }
-
-const questionSets = Object.fromEntries(
-  Object.entries(sampleQuestionSets).map(([week,samples])=>[week,buildPreviewWeek(samples)])
-);
-
-const sectionColors = {Phonics:'#ec6c8c',Sentences:'#e9ad3e',Reading:'#4b94ce',Math:'#50a66b'};
-let activeWeek = 1;
-let student = 'Explorer';
-let questions = questionSets[1];
-let current = 0;
-let answers = [];
-let reportBlob = null;
-let reportUrl = '';
-
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(screen => screen.classList.toggle('active',screen.id===id));
-  window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+function shuffle(values){const result=[...values];for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;}
+function selectWeek(week){activeWeek=week;questions=questionSets[week];current=0;answers=[];const data=weekData[week];$('week-hero-image').src=data.hero;$('week-hero-image').alt=data.heroAlt;document.querySelector('.welcome-scene').setAttribute('aria-label',data.heroAlt);$('week-pill').textContent=`Week ${week}`;showScreen('welcome');setTimeout(()=>$('student-name').focus(),250);}
+function start(){student=$('student-name').value.trim()||'Explorer';current=0;answers=[];showScreen('quiz');renderQuestion();}
+function shapeElement(token){
+  const shape=document.createElement(token==='blank'?'span':'img');shape.className=`pattern-shape ${token}`;shape.setAttribute('aria-hidden','true');
+  if(token!=='blank'){shape.src=shapeAssets[token];shape.alt='';shape.decoding='async';}
+  return shape;
 }
-
-function speak(text){
-  if(!text || !('speechSynthesis' in window)) return;
-  speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text.replace(/___/g,'blank'));
-  utterance.lang='en-US'; utterance.rate=.86; utterance.pitch=1.03;
-  const voices=speechSynthesis.getVoices();
-  const voice=voices.find(item=>item.lang==='en-US'&&/Samantha|Jenny|Aria|Ava|Google US English/i.test(item.name))||voices.find(item=>item.lang==='en-US');
-  if(voice) utterance.voice=voice;
-  speechSynthesis.speak(utterance);
-}
-
-function selectWeek(week){
-  activeWeek=week; questions=questionSets[week]; current=0; answers=[];
-  const data=weekData[week];
-  $('week-hero-image').src=data.hero; $('week-hero-image').alt=data.heroAlt;
-  document.querySelector('.welcome-scene').setAttribute('aria-label',data.heroAlt);
-  $('week-pill').textContent=`Week ${week}`;
-  showScreen('welcome'); setTimeout(()=>$('student-name').focus(),250);
-}
-
-function start(){
-  student=$('student-name').value.trim()||'Explorer'; current=0; answers=[]; showScreen('quiz'); renderQuestion();
-}
+function animalGroup(animal,count,compact=false){const group=document.createElement('div');group.className=`animal-group ${compact?'compact':''}`;group.setAttribute('aria-label',`${count} ${animal}${count===1?'':'s'}`);for(let i=0;i<count;i++){const img=document.createElement('img');img.src=animalAssets[animal];img.alt='';img.decoding='async';group.appendChild(img);}return group;}
+function renderQuestionVisual(item){const visual=$('question-visual');visual.innerHTML='';visual.className='question-visual';if(!item.media){visual.hidden=true;return;}visual.hidden=false;if(item.media.type==='image'){visual.classList.add('picture-prompt');const img=document.createElement('img');img.src=item.media.src;img.alt=item.media.alt;img.decoding='async';visual.appendChild(img);}else if(item.media.type==='pattern'){visual.classList.add('pattern-prompt');const row=document.createElement('div');row.className='pattern-row';row.setAttribute('aria-label','Shape pattern with missing shapes');item.media.tokens.forEach(token=>row.appendChild(shapeElement(token)));visual.appendChild(row);}else if(item.media.type==='equation'){visual.classList.add('equation-prompt');const groups=document.createElement('div');groups.className='equation-groups';item.media.groups.forEach((count,index)=>{if(index){const plus=document.createElement('b');plus.textContent='+';groups.appendChild(plus);}groups.appendChild(animalGroup(item.media.animal,count,true));});const expression=document.createElement('strong');expression.textContent=item.media.expression;visual.append(groups,expression);}}
+function renderChoiceContent(button,itemChoice){const main=document.createElement('span');main.className='choice-main';if(itemChoice.image){const img=document.createElement('img');img.src=itemChoice.image;img.alt=itemChoice.imageAlt||'';img.decoding='async';main.appendChild(img);}if(itemChoice.tokens){const shapes=document.createElement('span');shapes.className='choice-shapes';itemChoice.tokens.forEach(token=>shapes.appendChild(shapeElement(token)));main.appendChild(shapes);}if(itemChoice.animal&&itemChoice.count)main.appendChild(animalGroup(itemChoice.animal,itemChoice.count,true));const label=document.createElement('strong');label.textContent=itemChoice.label;main.appendChild(label);button.appendChild(main);const small=document.createElement('small');small.textContent='Tap to choose';button.appendChild(small);}
 
 function renderQuestion(){
-  const item=questions[current];
-  $('section-label').textContent=item.section; $('progress-label').textContent=`${item.position} of 20`; $('leaf-number').textContent=item.position;
-  $('progress-bar').style.width=`${item.position/20*100}%`; $('question-icon').textContent=item.icon; $('question-tag').textContent=item.tag;
-  $('question-text').textContent=item.q; $('question-hint').textContent=item.hint; $('feedback').textContent=''; $('feedback').className='feedback';
-  $('practice-popup').hidden=true; $('next-btn').classList.remove('show'); $('choices').innerHTML='';
-  item.choices.forEach((choice,index)=>{
-    const wrap=document.createElement('div'); wrap.className='choice-wrap';
-    const button=document.createElement('button'); button.type='button'; button.className='choice'; button.dataset.index=index;
-    button.textContent=choice;
-    const small=document.createElement('small'); small.textContent=item.pending?'Continue to the next reserved slot':'Tap to choose'; button.appendChild(small);
-    button.addEventListener('click',()=>choose(index));
-    const listen=document.createElement('button'); listen.type='button'; listen.className='choice-listen';
-    listen.setAttribute('aria-label',`Hear option: ${choice}`); listen.innerHTML='<span aria-hidden="true">🔊</span> Listen';
-    listen.addEventListener('click',()=>speak(choice));
-    wrap.append(button,listen); $('choices').appendChild(wrap);
-  });
+  stopAnswerFx();const item=questions[current];$('section-label').textContent=item.section;$('progress-label').textContent=`${item.position} of 20`;$('leaf-number').textContent=item.position;$('progress-bar').style.width=`${item.position/20*100}%`;$('question-icon').textContent=item.icon;$('question-tag').textContent=item.tag;$('question-text').textContent=item.q;$('question-hint').textContent=item.hint;$('feedback').textContent='';$('feedback').className='feedback';$('practice-popup').hidden=true;$('next-btn').classList.remove('show');$('choices').innerHTML='';renderQuestionVisual(item);
+  displayedChoices=shuffle(item.choices.map((itemChoice,originalIndex)=>({itemChoice,originalIndex})));
+  displayedChoices.forEach(({itemChoice,originalIndex})=>{const wrap=document.createElement('div');wrap.className='choice-wrap';const button=document.createElement('button');button.type='button';button.className='choice';button.dataset.index=originalIndex;renderChoiceContent(button,itemChoice);button.addEventListener('click',()=>choose(originalIndex));const listen=document.createElement('button');listen.type='button';listen.className='choice-listen';listen.setAttribute('aria-label',`Hear option: ${itemChoice.label}`);listen.innerHTML='<span aria-hidden="true">🔊</span> Listen';listen.addEventListener('click',()=>speak(itemChoice.speech||itemChoice.label));wrap.append(button,listen);$('choices').appendChild(wrap);});
+  requestAnimationFrame(()=>{const behavior=matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';document.querySelector('.question-card').scrollIntoView({behavior,block:'center'});});
   setTimeout(()=>speak(item.q),350);
 }
 
-function choose(index){
-  if(answers[current]!==undefined) return;
-  const item=questions[current]; const correct=item.pending||index===item.answer; answers[current]=item.pending?null:index;
-  document.querySelectorAll('.choice').forEach(button=>{
-    const choiceIndex=Number(button.dataset.index); button.disabled=true;
-    if(choiceIndex===index) button.classList.add('selected',correct?'correct':'wrong');
-    if(!correct&&choiceIndex===item.answer) button.classList.add('reveal');
-  });
-  $('feedback').textContent=item.pending?'Reserved slot checked. No curriculum or score was invented.':item.placeholder?'Interface preview saved — we will replace this with your Math lesson.':correct?'Great discovery! That answer is correct. 🌟':'Good try! Practice the green answer and keep exploring.';
-  $('feedback').classList.add(correct?'good':'try'); $('practice-text').textContent=item.practice; $('practice-popup').hidden=false;
-  $('next-btn').textContent=current===questions.length-1?'See results design 🎉':'Next preview slot →'; $('next-btn').classList.add('show');
-  speak(item.practice);
-}
-
-function nextQuestion(){
-  if(answers[current]===undefined) return;
-  if(current<questions.length-1){current+=1;renderQuestion()}else{showResults()}
-}
-
+function choose(index){if(answers[current]!==undefined)return;const item=questions[current],correct=item.pending||index===item.answer;answers[current]=item.pending?null:index;if('speechSynthesis'in window)speechSynthesis.cancel();const answeredQuestion=current;playAnswerSound(correct?'correct':'wrong').then(()=>{if(current===answeredQuestion&&answers[current]!==undefined)speak(item.practice);});document.querySelectorAll('.choice').forEach(button=>{const choiceIndex=Number(button.dataset.index);button.disabled=true;if(choiceIndex===index)button.classList.add('selected',correct?'correct':'wrong');if(!correct&&choiceIndex===item.answer)button.classList.add('reveal');});$('feedback').textContent=item.pending?'This question is reserved for the approved weekly lesson.':correct?'Great discovery! That answer is correct. 🌟':'Good try! Practice the green answer and keep exploring.';$('feedback').classList.add(correct?'good':'try');$('practice-text').textContent=item.practice;$('practice-popup').hidden=false;$('next-btn').textContent=current===questions.length-1?'See my results 🎉':'Next question →';$('next-btn').classList.add('show');}
+function nextQuestion(){if(answers[current]===undefined)return;if(current<questions.length-1){current+=1;renderQuestion();}else showResults();}
+function correctCount(section){return questions.reduce((sum,item,index)=>sum+(item.section===section&&answers[index]===item.answer?1:0),0);}
 function showResults(){
-  const samples=questions.filter(item=>!item.pending);
-  const correct=samples.reduce((sum,item)=>{const index=questions.indexOf(item);return sum+(answers[index]===item.answer?1:0)},0);
-  const previewScore=correct*5; const percent=Math.round(correct/samples.length*100);
-  $('score-number').textContent=previewScore; $('percent-badge').textContent=`${percent}%`; $('student-report-name').textContent=`${student}’s Week ${activeWeek} Report`;
-  $('results-message').textContent=`Great job, ${student}! You explored the full 20-slot preview.`;
-  $('score-title').textContent=percent>=75?'Super explorer!':'Growing explorer!'; $('score-note').textContent='Preview score based on one sample question from each section.';
-  $('score-ring').style.background=`conic-gradient(var(--leaf) ${percent*3.6}deg,#e8eee9 0deg)`;
-  $('skill-chart').innerHTML=Object.keys(sectionMeta).map(section=>{const index=questions.findIndex(item=>item.section===section&&!item.pending);const item=questions[index];const score=answers[index]===item.answer?5:0;return `<div class="skill-row"><span>${section}</span><div class="bar-track"><div class="bar-fill" style="width:${score*20}%;background:${sectionColors[section]}"></div></div><b>${score}/5</b></div>`}).join('');
-  $('analysis-text').textContent=`${student}, your full field note will identify your strongest skill and the best next practice step after all 20 questions are added.`;
-  $('answer-review').innerHTML=questions.map((item,index)=>item.pending
-    ? `<div class="review-item pending"><span>🧭</span><span><b>${index+1}. ${item.section}</b><br>Reserved for approved curriculum</span><span>Pending</span></div>`
-    : `<div class="review-item"><span>${answers[index]===item.answer?'✅':'🌱'}</span><span><b>${index+1}. ${item.section}</b><br>${item.q}</span><span>${answers[index]===undefined?'Not answered':item.choices[answers[index]]}</span></div>`).join('');
-  showScreen('results');
+  const scorable=questions.filter(item=>!item.pending),correct=scorable.reduce((sum,item)=>{const index=questions.indexOf(item);return sum+(answers[index]===item.answer?1:0);},0),percent=scorable.length?Math.round(correct/scorable.length*100):0;
+  lastScore=correct;$('score-number').textContent=correct;$('percent-badge').textContent=`${percent}%`;$('student-report-name').textContent=`${student}’s Week ${activeWeek} Report`;$('results-message').textContent=`Great job, ${student}! You completed all four Week ${activeWeek} trails.`;$('score-title').textContent=percent>=90?'Outstanding explorer!':percent>=75?'Super explorer!':percent>=50?'Growing explorer!':'Keep exploring!';$('score-note').textContent='Your score from all 20 questions.';$('score-ring').style.background=`conic-gradient(var(--leaf) ${percent*3.6}deg,#e8eee9 0deg)`;
+  const scores=Object.keys(sectionMeta).map(section=>({section,score:correctCount(section)}));$('skill-chart').innerHTML=scores.map(({section,score})=>`<div class="skill-row"><span>${section}</span><div class="bar-track"><div class="bar-fill" style="width:${score*20}%;background:${sectionColors[section]}"></div></div><b>${score}/5</b></div>`).join('');const best=Math.max(...scores.map(item=>item.score)),needs=Math.min(...scores.map(item=>item.score)),strongest=scores.filter(item=>item.score===best).map(item=>item.section).join(' and '),practice=scores.find(item=>item.score===needs).section;$('analysis-text').textContent=`${student}, your strongest trail was ${strongest}. Practice ${practice} again to make your next expedition even stronger.`;
+  $('answer-review').innerHTML=questions.map((item,index)=>{const selected=answers[index],selectedLabel=selected===undefined?'Not answered':selected===null?'Reserved':item.choices[selected].label,correctAnswer=item.answer===null?'Reserved':item.choices[item.answer].label;return`<div class="review-item${item.pending?' pending':''}"><span>${item.pending?'🧭':selected===item.answer?'✅':'🌱'}</span><span><b>${index+1}. ${item.section}</b><br>${item.q}${selected!==item.answer&&!item.pending?`<small>Correct answer: ${correctAnswer}</small>`:''}</span><span>${selectedLabel}</span></div>`;}).join('');
+  rewardInitialized=false;$('reward-card').disabled=false;resetRewardPreview();showScreen('results');
 }
-
-function resetToWeeks(){
-  if('speechSynthesis' in window) speechSynthesis.cancel(); current=0; answers=[]; $('week-pill').textContent='📅 Level C · Month 7'; showScreen('week-select');
+function unlockedRewardCount(){return lastScore<=5?1:lastScore<=10?2:lastScore<=15?3:4;}
+function currentRewardConfig(){return rewardConfigs[activeWeek];}
+function resetRewardPreview(){const config=currentRewardConfig(),image=$('reward-preview');image.src='assets/images/kids-3d-present-box.webp';image.alt='A colorful 3D present box containing the Nature Expedition dress-up reward';image.classList.remove('character-reward');document.querySelector('.reward-label').textContent='NEW REWARD';$('reward-card-title').textContent=config.cardTitle;$('reward-card').querySelector('small').textContent='Tap to dress your GP Friend →';}
+function resetReward(){
+  const config=currentRewardConfig(),unlocked=unlockedRewardCount(),video=$('reward-celebration-video');if(rewardClipTimer){clearTimeout(rewardClipTimer);rewardClipTimer=null;}video.pause();video.removeAttribute('src');video.load();video.hidden=true;rewardApplied=0;rewardCompletedLevel=0;rewardInitialized=true;resetRewardPreview();$('reward-replay-clip').hidden=true;$('reward-replay-clip').disabled=false;
+  $('reward-title').textContent=config.modalTitle;$('reward-character').src=config.stages[0];$('reward-character').alt=config.characterAlt;$('reward-unlock-message').textContent=`Score: ${lastScore}/20 — You unlocked ${config.unlockLabels[unlocked-1]}!`;$('reward-status').textContent=`Start with the ${config.items[0].name}!`;$('reward-items').innerHTML='';
+  config.items.forEach((item,index)=>{const isUnlocked=index<unlocked,button=document.createElement('button');button.type='button';button.className=`reward-item${isUnlocked?'':' locked'}`;button.disabled=!isUnlocked;button.draggable=isUnlocked;button.dataset.item=item.key;button.dataset.order=index;button.setAttribute('aria-disabled',String(!isUnlocked));button.innerHTML=`<span class="lock-mark" aria-hidden="true">🔒</span><img src="${item.image}" alt="${item.alt}"><b>${item.label}</b>`;button.addEventListener('click',()=>applyReward(item.key));button.addEventListener('dragstart',event=>{if(!isUnlocked){event.preventDefault();return;}event.dataTransfer.setData('text/plain',item.key);event.dataTransfer.effectAllowed='move';});$('reward-items').appendChild(button);});
 }
+function openReward(){if(!rewardInitialized)resetReward();$('reward-modal').hidden=false;$('reward-close').focus();}
+function closeReward(){if(rewardClipTimer){clearTimeout(rewardClipTimer);rewardClipTimer=null;}const video=$('reward-celebration-video');video.pause();video.hidden=true;if(rewardCompletedLevel)$('reward-replay-clip').hidden=false;$('reward-modal').hidden=true;}
+function completeReward(level){const config=currentRewardConfig(),video=$('reward-celebration-video'),preview=$('reward-preview');rewardCompletedLevel=level;$('reward-replay-clip').hidden=true;preview.src=config.stages[level];preview.alt=`${student}’s completed Nature Expedition dress-up character`;preview.classList.add('character-reward');document.querySelector('.reward-label').textContent='COMPLETE!';$('reward-card-title').textContent=config.resultTitle;$('reward-card').querySelector('small').textContent='Tap to see it again →';$('reward-status').textContent=level===4?'Perfect explorer look! You earned every item! 🏆':'Great look! Keep learning to unlock more next time! 🌟';const clip=config.clips[level-1];if(!clip){playButtonClick();return;}video.src=clip;video.hidden=true;const showFinal=()=>{video.hidden=true;$('reward-replay-clip').hidden=false;$('reward-replay-clip').disabled=false;};video.onended=showFinal;video.onerror=showFinal;rewardClipTimer=setTimeout(()=>{rewardClipTimer=null;video.hidden=false;video.play().catch(showFinal);},1000);}
+function replayRewardClip(){const clip=currentRewardConfig().clips[rewardCompletedLevel-1];if(!rewardCompletedLevel||!clip)return;const video=$('reward-celebration-video');video.currentTime=0;video.hidden=false;$('reward-replay-clip').disabled=true;video.play().catch(()=>{video.hidden=true;$('reward-replay-clip').disabled=false;});}
+function applyReward(itemKey){const config=currentRewardConfig(),button=document.querySelector(`.reward-item[data-item="${itemKey}"]`);if(!button||button.classList.contains('locked')||button.classList.contains('applied'))return;const order=Number(button.dataset.order);if(order!==rewardApplied){$('reward-status').textContent=`Try the ${config.items[rewardApplied].name} first!`;return;}rewardApplied+=1;button.classList.add('applied');button.draggable=false;$('reward-character').src=config.stages[rewardApplied];$('reward-character').alt=`The explorer wearing ${config.items.slice(0,rewardApplied).map(item=>item.name).join(', ')}`;if(rewardApplied===unlockedRewardCount())completeReward(rewardApplied);else{playButtonClick();$('reward-status').textContent=`Great! Now add the ${config.items[rewardApplied].name}.`;}}
+function resetToWeeks(){if('speechSynthesis'in window)speechSynthesis.cancel();stopAnswerFx();current=0;answers=[];$('week-pill').textContent='📅 Level C · Month 7';showScreen('week-select');}
 
 async function captureReport(){
-  const button=$('capture-btn'); const original=button.textContent; button.disabled=true; button.textContent='📸 Capturing…';
+  const button=$('capture-btn'),original=button.innerHTML;button.disabled=true;button.innerHTML='📸 Capturing…';let stage=null;
   try{
-    const report=$('results'); report.classList.add('active');
-    const canvas=await html2canvas(report,{backgroundColor:'#fffdf5',scale:Math.min(1.5,devicePixelRatio||1),useCORS:true,logging:false});
-    reportBlob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png',.95));
-    if(!reportBlob) throw new Error('No image');
-    if(reportUrl) URL.revokeObjectURL(reportUrl); reportUrl=URL.createObjectURL(reportBlob); $('capture-image').src=reportUrl; $('capture-modal').hidden=false;
-  }catch(error){alert('The report picture could not be created. Please try again.')}finally{button.disabled=false;button.textContent=original}
+    if(typeof html2canvas!=='function')throw new Error('The report capture library did not load.');
+    const source=$('results'),report=source.cloneNode(true);
+    stage=document.createElement('div');stage.className='capture-export-stage';report.removeAttribute('id');report.classList.add('active','capture-export');report.style.display='block';
+    stage.appendChild(report);document.body.appendChild(stage);
+    if(document.fonts?.ready)await document.fonts.ready;
+    await Promise.all([...report.querySelectorAll('img')].map(image=>{image.loading='eager';image.decoding='sync';if(image.complete&&image.naturalWidth)return Promise.resolve();return new Promise(resolve=>{const timeout=setTimeout(resolve,10000);image.onload=image.onerror=()=>{clearTimeout(timeout);resolve();};});}));
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    const width=Math.ceil(report.scrollWidth),height=Math.ceil(report.scrollHeight),maxPixels=16000000,preferredScale=Math.min(1.5,devicePixelRatio||1.5),safeScale=Math.min(preferredScale,Math.sqrt(maxPixels/Math.max(1,width*height)));
+    const canvas=await html2canvas(report,{scale:Math.max(1,safeScale),width,height,windowWidth:Math.max(1200,width),windowHeight:Math.max(900,height),useCORS:true,allowTaint:false,imageTimeout:15000,backgroundColor:'#fffdf5',logging:false,onclone:clonedDocument=>{const clonedReport=clonedDocument.querySelector('.capture-export-stage .capture-export');if(clonedReport){clonedReport.classList.add('active','capture-export');clonedReport.style.display='block';}}});
+    reportBlob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png',.95));if(!reportBlob)throw new Error('The browser could not create the report image.');
+    if(reportUrl)URL.revokeObjectURL(reportUrl);reportUrl=URL.createObjectURL(reportBlob);$('capture-image').src=reportUrl;$('share-note').textContent='Download it to this device or share it using an available app.';$('capture-modal').hidden=false;$('capture-close').focus();
+  }catch(error){console.error('Report capture failed:',error);alert('The report picture could not be created. Please try again.');}
+  finally{stage?.remove();button.disabled=false;button.innerHTML=original;}
 }
-
-function fileName(){return `${student.toLowerCase().replace(/[^a-z0-9]+/g,'-')||'student'}-level-c-week-${activeWeek}-report.png`}
-function downloadReport(){if(!reportBlob)return;const link=document.createElement('a');link.href=reportUrl;link.download=fileName();link.click();$('share-note').textContent='Your report picture has been downloaded!'}
-async function shareReport(){if(!reportBlob)return;const file=new File([reportBlob],fileName(),{type:'image/png'});if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){try{await navigator.share({title:`${student}’s GP Report`,text:'My Level C Nature Expedition weekly report',files:[file]});return}catch(error){if(error.name==='AbortError')return}}downloadReport();$('share-note').textContent='Direct sharing is unavailable, so the report was downloaded.'}
+function fileName(){return`${student.toLowerCase().replace(/[^a-z0-9]+/g,'-')||'student'}-level-c-week-${activeWeek}-report.png`;}
+function downloadReport(){if(!reportBlob)return;const link=document.createElement('a');link.href=reportUrl;link.download=fileName();link.style.display='none';document.body.appendChild(link);link.click();link.remove();$('share-note').textContent='Your report picture has been downloaded!';}
+async function shareReport(){if(!reportBlob)return;const file=new File([reportBlob],fileName(),{type:'image/png'});if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){try{await navigator.share({title:`${student}’s GP Report`,text:'My Level C Nature Expedition weekly report',files:[file]});return;}catch(error){if(error.name==='AbortError')return;}}downloadReport();$('share-note').textContent='Direct sharing is unavailable, so the report was downloaded.';}
 
 document.querySelectorAll('.week-card').forEach(card=>card.addEventListener('click',()=>selectWeek(Number(card.dataset.week))));
-$('home-logo').addEventListener('click',()=>{if(!$('quiz').classList.contains('active')||confirm('Return to weekly trails? Your preview answers will be cleared.'))resetToWeeks()}); $('all-weeks-btn').addEventListener('click',resetToWeeks); $('quit-btn').addEventListener('click',()=>{if(confirm('Return to weekly trails? Your preview answers will be cleared.'))resetToWeeks()});
-$('start-btn').addEventListener('click',start); $('student-name').addEventListener('keydown',event=>{if(event.key==='Enter')start()});
-$('question-listen').addEventListener('click',()=>speak(questions[current].q)); $('practice-replay').addEventListener('click',()=>speak(questions[current].practice));
-$('next-btn').addEventListener('click',nextQuestion); $('preview-results-btn').addEventListener('click',showResults); $('restart-btn').addEventListener('click',()=>{showScreen('welcome');$('student-name').focus()});
-$('reward-card').addEventListener('click',()=>{$('reward-modal').hidden=false}); $('reward-close').addEventListener('click',()=>{$('reward-modal').hidden=true});
-$('capture-btn').addEventListener('click',captureReport); $('capture-close').addEventListener('click',()=>{$('capture-modal').hidden=true}); $('download-capture').addEventListener('click',downloadReport); $('share-capture').addEventListener('click',shareReport);
-document.querySelectorAll('.modal').forEach(modal=>modal.addEventListener('click',event=>{if(event.target===modal)modal.hidden=true}));
-document.addEventListener('keydown',event=>{if(event.key==='Escape')document.querySelectorAll('.modal').forEach(modal=>modal.hidden=true)});
+$('home-logo').addEventListener('click',()=>{if(!$('quiz').classList.contains('active')||confirm('Return to weekly trails? Your answers will be cleared.'))resetToWeeks();});$('all-weeks-btn').addEventListener('click',resetToWeeks);$('quit-btn').addEventListener('click',()=>{if(confirm('Return to weekly trails? Your answers will be cleared.'))resetToWeeks();});$('start-btn').addEventListener('click',start);$('student-name').addEventListener('keydown',event=>{if(event.key==='Enter')start();});$('question-listen').addEventListener('click',()=>speak(questions[current].q));$('practice-replay').addEventListener('click',()=>speak(questions[current].practice));$('next-btn').addEventListener('click',nextQuestion);$('restart-btn').addEventListener('click',()=>{showScreen('welcome');$('student-name').focus();});
+$('reward-card').addEventListener('click',openReward);$('reward-close').addEventListener('click',closeReward);$('reward-reset').addEventListener('click',resetReward);$('reward-replay-clip').addEventListener('click',replayRewardClip);$('character-dropzone').addEventListener('dragover',event=>{event.preventDefault();event.currentTarget.classList.add('drag-over');event.dataTransfer.dropEffect='move';});$('character-dropzone').addEventListener('dragleave',event=>event.currentTarget.classList.remove('drag-over'));$('character-dropzone').addEventListener('drop',event=>{event.preventDefault();event.currentTarget.classList.remove('drag-over');applyReward(event.dataTransfer.getData('text/plain'));});
+$('capture-btn').addEventListener('click',captureReport);$('capture-close').addEventListener('click',()=>{$('capture-modal').hidden=true;});$('download-capture').addEventListener('click',downloadReport);$('share-capture').addEventListener('click',shareReport);$('capture-modal').addEventListener('click',event=>{if(event.target===$('capture-modal'))$('capture-modal').hidden=true;});$('reward-modal').addEventListener('click',event=>{if(event.target===$('reward-modal'))closeReward();});document.addEventListener('keydown',event=>{if(event.key==='Escape'){$('capture-modal').hidden=true;closeReward();}});
+document.addEventListener('click',event=>{const button=event.target.closest('button');if(button&&!button.disabled&&!button.matches('.choice,.choice-listen,.question-listen,#practice-replay'))playButtonClick();},true);
