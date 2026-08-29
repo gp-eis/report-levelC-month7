@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#176447" />
+  <meta name="description" content="Little GP Champions Level C Month 7 Nature Expedition weekly report." />
+  <title>Little GP Champions — Level C Weekly Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&amp;family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sky-decor" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <main class="app-shell">
+    <header class="brand-bar">
+      <button id="home-logo" class="brand" type="button" aria-label="Return to weekly selection">
+        <span class="brand-mark">★</span>
+        <span><strong>Little GP Champions</strong><small>Weekly Report Adventure</small></span>
+      </button>
+      <img class="school-logo" src="assets/giiip-eis-logo.webp" alt="GIP EIS" />
+      <span id="week-pill" class="week-pill">📅 Level C · Month 7</span>
+    </header>
+
+    <section id="week-select" class="screen week-select active" aria-labelledby="week-select-title">
+      <div class="week-select-heading">
+        <span class="week-select-kicker">🧭 LEVEL C NATURE EXPEDITION</span>
+        <h1 id="week-select-title">Choose Your Weekly<br /><em>GP Adventure!</em></h1>
+        <p>Pick a week and show Gerry and Penny what you learned.</p>
+      </div>
+      <div class="week-grid">
+        <button class="week-card park" type="button" data-week="1">
+          <span class="week-num">1</span><span class="week-copy"><small>WEEK</small><strong>In the Park</strong><span>20 GP challenges</span></span><span class="card-arrow">→</span>
+          <span class="week-art"><img class="week-card-hero" src="assets/weekly/week-1-card-hero.png" alt="" /></span><span class="ready-ribbon">PLAY WEEK 1</span>
+        </button>
+        <button class="week-card garden" type="button" data-week="2">
+          <span class="week-num">2</span><span class="week-copy"><small>WEEK</small><strong>In the Garden</strong><span>20 GP challenges</span></span><span class="card-arrow">→</span>
+          <span class="week-art"><img class="week-card-hero" src="assets/weekly/week-2-card-hero.png" alt="" /></span><span class="ready-ribbon">PLAY WEEK 2</span>
+        </button>
+        <button class="week-card yard" type="button" data-week="3">
+          <span class="week-num">3</span><span class="week-copy"><small>WEEK</small><strong>In the Yard</strong><span>20 GP challenges</span></span><span class="card-arrow">→</span>
+          <span class="week-art"><img class="week-card-hero" src="assets/weekly/week-3-card-hero.png" alt="" /></span><span class="ready-ribbon">PLAY WEEK 3</span>
+        </button>
+        <button class="week-card cave" type="button" data-week="4">
+          <span class="week-num">4</span><span class="week-copy"><small>WEEK</small><strong>In the Cave</strong><span>20 GP challenges</span></span><span class="card-arrow">→</span>
+          <span class="week-art"><img class="week-card-hero" src="assets/weekly/week-4-card-hero.png" alt="" /></span><span class="ready-ribbon">PLAY WEEK 4</span>
+        </button>
+      </div>
+      <div class="week-select-footer"><span>🌿</span> One nature challenge every week! <span>🌿</span></div>
+    </section>
+
+    <section id="welcome" class="screen welcome" aria-labelledby="welcome-title">
+      <div class="welcome-copy">
+        <button id="all-weeks-btn" class="all-weeks-btn" type="button"><span aria-hidden="true">←</span> All Weeks</button>
+        <h1 id="welcome-title">Ready for Your Weekly<br /><em>GP Adventure?</em></h1>
+        <p>Show Gerry and Penny what you learned this week!</p>
+        <label for="student-name">Your name</label>
+        <div class="name-row"><input id="student-name" maxlength="20" autocomplete="given-name" placeholder="Type your name..." /><button id="start-btn" class="primary-btn" type="button">Let’s Go! <span>→</span></button></div>
+        <div class="report-sections"><span>Aa <b>Phonics</b></span><span>💬 <b>Sentences</b></span><span>📖 <b>Reading</b></span><span>123 <b>Math</b></span></div>
+      </div>
+      <div class="welcome-scene">
+        <div class="level-badge"><span>🌿</span><b>LEVEL C</b><small>Nature Explorer</small></div>
+        <img id="week-hero-image" class="welcome-hero-image" src="assets/weekly/week-1-card-hero.png" alt="Gerry and Penny exploring the park with a friendly dog" decoding="async" fetchpriority="high" />
+      </div>
+    </section>
+
+    <section id="quiz" class="screen quiz" aria-labelledby="question-text">
+      <div class="quiz-top">
+        <button id="quit-btn" class="icon-btn" type="button" aria-label="Return to weekly selection">⌂</button>
+        <div class="progress-wrap"><div class="progress-label"><span id="section-label">Phonics</span><b id="progress-label">1 of 20</b></div><div class="progress-track"><div id="progress-bar"></div></div></div>
+        <span class="leaf-count">🌿 <b id="leaf-number">1</b></span>
+      </div>
+      <article class="question-card">
+        <span id="question-icon" class="question-icon" aria-hidden="true">🔤</span>
+        <span id="question-tag" class="question-tag">SOUND TRAIL</span>
+        <h2 id="question-text">Which word has the <em>ai</em> vowel team?</h2>
+        <p id="question-hint">Listen, then choose the best answer.</p>
+        <button id="question-listen" class="listen-btn" type="button">🔊 Hear the question</button>
+        <div id="choices" class="choices"></div>
+        <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+        <div id="practice-popup" class="practice-popup" hidden><div><small>LISTEN &amp; REPEAT</small><strong id="practice-text"></strong></div><button id="practice-replay" type="button" aria-label="Hear the practice sentence again">🔊</button></div>
+        <button id="next-btn" class="primary-btn next-btn" type="button">Next question →</button>
+      </article>
+      <p class="helper-text">Choose the answer that feels right. You’ve got this! 🌟</p>
+    </section>
+
+    <section id="results" class="screen results" aria-labelledby="results-title">
+      <div class="results-heading"><span class="results-medal">🏅</span><div><span class="eyebrow">EXPEDITION COMPLETE!</span><h1 id="results-title">Amazing work!</h1><p id="student-report-name"></p><p id="results-message"></p></div></div>
+      <div class="results-layout">
+        <button id="reward-card" class="reward-card" type="button"><span class="reward-label">NEW REWARD</span><span class="reward-orb">🎁</span><strong id="reward-card-title">Explorer Dress-Up</strong><small>Tap to open the adventure pack →</small></button>
+        <div class="results-main">
+          <div class="results-grid">
+            <article class="score-card"><div id="score-ring" class="score-ring"><span id="score-number">0</span><small>/ 20</small></div><h2 id="score-title">Great trail!</h2><p id="score-note"></p></article>
+            <article class="chart-card"><div class="card-title"><div><span class="mini-label">YOUR GP RESULTS</span><h2>Skills at a glance</h2></div><span id="percent-badge">0%</span></div><div id="skill-chart" class="skill-chart"></div></article>
+          </div>
+          <article class="analysis-card"><span>🧭</span><div><span class="mini-label">GP FRIEND’S FIELD NOTE</span><h2>Your next discovery step</h2><p id="analysis-text"></p></div></article>
+        </div>
+      </div>
+      <details class="review-card"><summary>See all my answers <span>⌄</span></summary><div id="answer-review" class="answer-review"></div></details>
+      <div class="result-actions"><button id="restart-btn" class="secondary-btn" type="button">↻ Try again</button><button id="capture-btn" class="camera-btn" type="button">📸 Capture report</button></div>
+    </section>
+  </main>
+
+  <footer class="page-footer">🌿 Every trail grows a brave, curious learner. 🌿</footer>
+
+  <div id="capture-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="capture-title" hidden>
+    <div class="modal-dialog"><button id="capture-close" class="modal-close" type="button" aria-label="Close">×</button><span class="eyebrow">YOUR REPORT PICTURE</span><h2 id="capture-title">Ready to save or share!</h2><div class="capture-preview"><img id="capture-image" alt="Preview of the captured report" /></div><p id="share-note">Download it or share it using an available app.</p><div class="modal-actions"><button id="download-capture" class="secondary-btn" type="button">⬇ Download</button><button id="share-capture" class="primary-btn" type="button">Share report ↗</button></div></div>
+  </div>
+
+  <div id="reward-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reward-title" hidden>
+    <div class="modal-dialog reward-dialog"><button id="reward-close" class="modal-close" type="button" aria-label="Close">×</button><div class="reward-modal-heading"><div><span class="eyebrow">YOUR SCORE REWARD</span><h2 id="reward-title">Explorer Dress-Up!</h2><p id="reward-unlock-message"></p></div><button id="reward-reset" class="secondary-btn" type="button">↻ Start over</button></div><div class="reward-game"><div class="character-dropzone"><span class="drop-hint">Tap an unlocked item to dress your GP Friend</span><div class="character-stage"><img id="reward-character" src="assets/characters/gerry.png" alt="GP Friend ready for dress-up" /><div id="equipped-items" class="equipped-items" aria-hidden="true"></div></div><div id="reward-status" role="status" aria-live="polite">Choose your first item!</div></div><div class="item-locker"><h3>Adventure Pack</h3><p>Higher scores unlock more items.</p><div id="reward-items" class="reward-items"></div></div></div></div>
+  </div>
+
+  <script src="assets/vendor/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
