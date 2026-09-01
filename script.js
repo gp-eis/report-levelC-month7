@@ -15,7 +15,7 @@ const picture = (src, alt) => ({type:'image',src,alt});
 const choice = (label, speech=label, extra={}) => ({label,speech,...extra});
 
 const week1Questions = [
-  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes t__l?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/tail.png`,'An elephant showing its tail'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'An elephant has a tail.'},
+  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes t__l?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/tail-arrow.png`,'A yellow arrow pointing to an elephant’s tail'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'An elephant has a tail.'},
   {section:'Phonics',position:2,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes r__n?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/rain.png`,'A child standing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'It is in the rain.'},
   {section:'Phonics',position:3,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes spr__?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/spray.png`,'An elephant spraying water'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can spray water.'},
   {section:'Phonics',position:4,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes pl__?',hint:'Look at the picture and complete the word.',media:picture(`${w1}/phonics/play.png`,'An animal playing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can play in the rain.'},
@@ -41,7 +41,7 @@ const week1Questions = [
 ];
 
 const week2Questions = [
-  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes t__l?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/tail.png`,'An elephant showing its tail'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'An elephant has a tail.'},
+  {section:'Phonics',position:1,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes t__l?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/tail-arrow.png`,'A yellow arrow pointing to an elephant’s tail'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'An elephant has a tail.'},
   {section:'Phonics',position:2,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes r__n?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/rain.png`,'A child standing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:0,practice:'It is in the rain.'},
   {section:'Phonics',position:3,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes spr__?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/spray.png`,'An elephant spraying water'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can spray water.'},
   {section:'Phonics',position:4,tag:'VOWEL TEAM',icon:'🔤',q:'Which vowel team completes pl__?',hint:'Look at the picture and complete the word.',media:picture(`${w2}/phonics/play.png`,'An animal playing in the rain'),choices:[choice('ai','A I'),choice('ay','A Y')],answer:1,practice:'It can play in the rain.'},
