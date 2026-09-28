@@ -176,9 +176,38 @@ let activeWeek=1,student='Explorer',questions=questionSets[1],current=0,answers=
 let reportBlob=null,reportUrl='';
 let audioContext=null,answerFxAudio=null,answerFxTimer=null;
 let lastScore=0,rewardApplied=0,rewardCompletedLevel=0,rewardInitialized=false,rewardClipTimer=null;
+let americanEnglishVoice=null,speechRequestId=0;
+
+const isAmericanEnglishVoice=voice=>/^en[-_]US$/i.test(voice?.lang||'');
+const preferredAmericanVoice=voice=>/Google US English|Microsoft (Aria|Jenny|Guy|Ana|David|Zira|Mark)|Samantha|Ava/i.test(voice?.name||'');
+function findAmericanEnglishVoice(){
+  if(!('speechSynthesis'in window))return null;
+  const voices=speechSynthesis.getVoices().filter(isAmericanEnglishVoice);
+  americanEnglishVoice=voices.find(preferredAmericanVoice)||voices[0]||null;
+  return americanEnglishVoice;
+}
+function waitForAmericanEnglishVoice(timeout=1800){
+  const ready=findAmericanEnglishVoice();
+  if(ready||!('speechSynthesis'in window))return Promise.resolve(ready);
+  return new Promise(resolve=>{
+    let finished=false;
+    const finish=()=>{if(finished)return;finished=true;clearTimeout(timer);speechSynthesis.removeEventListener?.('voiceschanged',check);resolve(findAmericanEnglishVoice());};
+    const check=()=>{if(findAmericanEnglishVoice())finish();};
+    const timer=setTimeout(finish,timeout);
+    speechSynthesis.addEventListener?.('voiceschanged',check,{once:true});
+  });
+}
+if('speechSynthesis'in window){findAmericanEnglishVoice();speechSynthesis.addEventListener?.('voiceschanged',findAmericanEnglishVoice);}
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(screen=>screen.classList.toggle('active',screen.id===id));window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
-function speak(text){if(!text||!('speechSynthesis'in window))return;speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text.replace(/___/g,'blank').replace(/__/g,'blank'));utterance.lang='en-US';utterance.rate=.86;utterance.pitch=1.03;const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>v.lang==='en-US'&&/Samantha|Jenny|Aria|Ava|Google US English/i.test(v.name))||voices.find(v=>v.lang==='en-US')||null;speechSynthesis.speak(utterance);}
+async function speak(text){
+  if(!text||!('speechSynthesis'in window))return;
+  const requestId=++speechRequestId;speechSynthesis.cancel();
+  const voice=americanEnglishVoice||await waitForAmericanEnglishVoice();
+  if(requestId!==speechRequestId||!voice){console.warn('American English speech is unavailable on this device.');return;}
+  const utterance=new SpeechSynthesisUtterance(text.replace(/___/g,'blank').replace(/__/g,'blank'));
+  utterance.voice=voice;utterance.lang='en-US';utterance.rate=.86;utterance.pitch=1.03;speechSynthesis.speak(utterance);
+}
 function playButtonClick(){
   try{
     audioContext=audioContext||new (window.AudioContext||window.webkitAudioContext)();
@@ -235,7 +264,7 @@ function renderQuestion(){
   setTimeout(()=>speak(item.q),350);
 }
 
-function choose(index){if(answers[current]!==undefined)return;const item=questions[current],correct=item.pending||index===item.answer;answers[current]=item.pending?null:index;if('speechSynthesis'in window)speechSynthesis.cancel();const answeredQuestion=current;playAnswerSound(correct?'correct':'wrong').then(()=>{if(current===answeredQuestion&&answers[current]!==undefined)speak(item.practice);});document.querySelectorAll('.choice').forEach(button=>{const choiceIndex=Number(button.dataset.index);button.disabled=true;if(choiceIndex===index)button.classList.add('selected',correct?'correct':'wrong');if(!correct&&choiceIndex===item.answer)button.classList.add('reveal');});$('feedback').textContent=item.pending?'This question is reserved for the approved weekly lesson.':correct?'Great discovery! That answer is correct. 🌟':'Good try! Practice the green answer and keep exploring.';$('feedback').classList.add(correct?'good':'try');$('practice-text').textContent=item.practice;$('practice-popup').hidden=false;$('next-btn').textContent=current===questions.length-1?'See my results 🎉':'Next question →';$('next-btn').classList.add('show');}
+function choose(index){if(answers[current]!==undefined)return;const item=questions[current],correct=item.pending||index===item.answer;answers[current]=item.pending?null:index;if('speechSynthesis'in window){speechRequestId+=1;speechSynthesis.cancel();}const answeredQuestion=current;playAnswerSound(correct?'correct':'wrong').then(()=>{if(current===answeredQuestion&&answers[current]!==undefined)speak(item.practice);});document.querySelectorAll('.choice').forEach(button=>{const choiceIndex=Number(button.dataset.index);button.disabled=true;if(choiceIndex===index)button.classList.add('selected',correct?'correct':'wrong');if(!correct&&choiceIndex===item.answer)button.classList.add('reveal');});$('feedback').textContent=item.pending?'This question is reserved for the approved weekly lesson.':correct?'Great discovery! That answer is correct. 🌟':'Good try! Practice the green answer and keep exploring.';$('feedback').classList.add(correct?'good':'try');$('practice-text').textContent=item.practice;$('practice-popup').hidden=false;$('next-btn').textContent=current===questions.length-1?'See my results 🎉':'Next question →';$('next-btn').classList.add('show');}
 function nextQuestion(){if(answers[current]===undefined)return;if(current<questions.length-1){current+=1;renderQuestion();}else showResults();}
 function correctCount(section){return questions.reduce((sum,item,index)=>sum+(item.section===section&&answers[index]===item.answer?1:0),0);}
 function showResults(){
@@ -258,7 +287,7 @@ function closeReward(){if(rewardClipTimer){clearTimeout(rewardClipTimer);rewardC
 function completeReward(level){const config=currentRewardConfig(),video=$('reward-celebration-video'),preview=$('reward-preview');rewardCompletedLevel=level;$('reward-replay-clip').hidden=true;preview.src=config.stages[level];preview.alt=`${student}’s completed Nature Expedition dress-up character`;preview.classList.add('character-reward');document.querySelector('.reward-label').textContent='COMPLETE!';$('reward-card-title').textContent=config.resultTitle;$('reward-card').querySelector('small').textContent='Tap to see it again →';$('reward-status').textContent=level===4?'Perfect explorer look! You earned every item! 🏆':'Great look! Keep learning to unlock more next time! 🌟';const clip=config.clips[level-1];if(!clip){playButtonClick();return;}video.src=clip;video.hidden=true;const showFinal=()=>{video.hidden=true;$('reward-replay-clip').hidden=false;$('reward-replay-clip').disabled=false;};video.onended=showFinal;video.onerror=showFinal;rewardClipTimer=setTimeout(()=>{rewardClipTimer=null;video.hidden=false;video.play().catch(showFinal);},1000);}
 function replayRewardClip(){const clip=currentRewardConfig().clips[rewardCompletedLevel-1];if(!rewardCompletedLevel||!clip)return;const video=$('reward-celebration-video');video.currentTime=0;video.hidden=false;$('reward-replay-clip').disabled=true;video.play().catch(()=>{video.hidden=true;$('reward-replay-clip').disabled=false;});}
 function applyReward(itemKey){const config=currentRewardConfig(),button=document.querySelector(`.reward-item[data-item="${itemKey}"]`);if(!button||button.classList.contains('locked')||button.classList.contains('applied'))return;const order=Number(button.dataset.order);if(order!==rewardApplied){$('reward-status').textContent=`Try the ${config.items[rewardApplied].name} first!`;return;}rewardApplied+=1;button.classList.add('applied');button.draggable=false;$('reward-character').src=config.stages[rewardApplied];$('reward-character').alt=`The explorer wearing ${config.items.slice(0,rewardApplied).map(item=>item.name).join(', ')}`;if(rewardApplied===unlockedRewardCount())completeReward(rewardApplied);else{playButtonClick();$('reward-status').textContent=`Great! Now add the ${config.items[rewardApplied].name}.`;}}
-function resetToWeeks(){if('speechSynthesis'in window)speechSynthesis.cancel();stopAnswerFx();current=0;answers=[];$('week-pill').textContent='📅 Level C · Month 7';showScreen('week-select');}
+function resetToWeeks(){if('speechSynthesis'in window){speechRequestId+=1;speechSynthesis.cancel();}stopAnswerFx();current=0;answers=[];$('week-pill').textContent='📅 Level C · Month 7';showScreen('week-select');}
 
 async function captureReport(){
   const button=$('capture-btn'),original=button.innerHTML;button.disabled=true;button.innerHTML='📸 Capturing…';let stage=null;
