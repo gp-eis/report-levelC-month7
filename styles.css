@@ -48,3 +48,6 @@ img.pattern-shape.star{display:block;width:62px!important;height:62px!important;
 /* Keep the question card unchanged; use the open right gutter for Next on wide screens. */
 @keyframes side-next-pop{from{opacity:0;transform:translateY(-50%) scale(.78)}to{opacity:1;transform:translateY(-50%) scale(1)}}
 @media(min-width:1240px){.question-card .next-btn{position:absolute;z-index:8;left:calc(100% + 26px);top:50%;align-items:center;justify-content:center;width:142px;height:142px;min-width:0;margin:0;padding:18px;border-radius:30px;font-size:20px;line-height:1.15;white-space:normal;transform:translateY(-50%)}.question-card .next-btn.show{display:flex;animation:side-next-pop .3s cubic-bezier(.2,1.4,.5,1)}.question-card .next-btn:hover{transform:translateY(calc(-50% - 3px))}.question-card .next-btn:active{transform:translateY(calc(-50% + 5px))}}
+
+/* Give young learners a familiar lesson word for each vowel-team choice. */
+.choice-example{display:block;margin-top:5px;color:var(--deep);font-size:16px;font-weight:850}
