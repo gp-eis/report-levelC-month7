@@ -209,8 +209,15 @@ async function speak(text){
   const requestId=++speechRequestId;speechSynthesis.cancel();
   const voice=americanEnglishVoice||await waitForAmericanEnglishVoice();
   if(requestId!==speechRequestId||!voice){console.warn('American English speech is unavailable on this device.');return;}
-  const utterance=new SpeechSynthesisUtterance(text.replace(/___/g,'blank').replace(/__/g,'blank'));
-  utterance.voice=voice;utterance.lang='en-US';utterance.rate=.86;utterance.pitch=1.03;speechSynthesis.speak(utterance);
+  const segments=(Array.isArray(text)?text:[text]).filter(Boolean);
+  const speakSegment=index=>{
+    if(requestId!==speechRequestId||index>=segments.length)return;
+    const utterance=new SpeechSynthesisUtterance(segments[index].replace(/___/g,'blank').replace(/__/g,'blank'));
+    utterance.voice=voice;utterance.lang='en-US';utterance.rate=.86;utterance.pitch=1.03;
+    if(index<segments.length-1)utterance.onend=()=>setTimeout(()=>speakSegment(index+1),550);
+    speechSynthesis.speak(utterance);
+  };
+  speakSegment(0);
 }
 function playButtonClick(){
   try{
@@ -259,7 +266,7 @@ function shapeElement(token){
 function animalGroup(animal,count,compact=false){const group=document.createElement('div');group.className=`animal-group ${compact?'compact':''}`;group.setAttribute('aria-label',`${count} ${animal}${count===1?'':'s'}`);for(let i=0;i<count;i++){const img=document.createElement('img');img.src=animalAssets[animal];img.alt='';img.decoding='async';group.appendChild(img);}return group;}
 function renderQuestionVisual(item){const visual=$('question-visual');visual.innerHTML='';visual.className='question-visual';if(!item.media){visual.hidden=true;return;}visual.hidden=false;if(item.media.type==='image'){visual.classList.add('picture-prompt');const frame=document.createElement('div'),img=document.createElement('img');frame.className='picture-frame';img.src=item.media.src;img.alt=item.media.alt;img.decoding='async';frame.appendChild(img);if(item.media.focus){const arrow=document.createElement('span');arrow.className='focus-arrow';arrow.setAttribute('aria-hidden','true');arrow.textContent='➜';arrow.style.left=`${item.media.focus.x}%`;arrow.style.top=`${item.media.focus.y}%`;arrow.style.setProperty('--focus-rotate',`${item.media.focus.rotate||0}deg`);frame.appendChild(arrow);}visual.appendChild(frame);}else if(item.media.type==='pattern'){visual.classList.add('pattern-prompt');const row=document.createElement('div');row.className='pattern-row';row.setAttribute('aria-label','Shape pattern with missing shapes');item.media.tokens.forEach(token=>row.appendChild(shapeElement(token)));visual.appendChild(row);}else if(item.media.type==='equation'){visual.classList.add('equation-prompt');const groups=document.createElement('div');groups.className='equation-groups';item.media.groups.forEach((count,index)=>{if(index){const plus=document.createElement('b');plus.textContent='+';groups.appendChild(plus);}groups.appendChild(animalGroup(item.media.animal,count,true));});const expression=document.createElement('strong');expression.textContent=item.media.expression;visual.append(groups,expression);}}
 function renderChoiceContent(button,itemChoice){const main=document.createElement('span');main.className='choice-main';if(itemChoice.image){const img=document.createElement('img');img.src=itemChoice.image;img.alt=itemChoice.imageAlt||'';img.decoding='async';main.appendChild(img);}if(itemChoice.tokens){const shapes=document.createElement('span');shapes.className='choice-shapes';itemChoice.tokens.forEach(token=>shapes.appendChild(shapeElement(token)));main.appendChild(shapes);}if(itemChoice.animal&&itemChoice.count)main.appendChild(animalGroup(itemChoice.animal,itemChoice.count,true));const label=document.createElement('strong');label.textContent=itemChoice.label;main.appendChild(label);if(itemChoice.example){const example=document.createElement('span');example.className='choice-example';example.textContent=itemChoice.example;main.appendChild(example);}if(itemChoice.cue){const cue=document.createElement('span');cue.className=`choice-cue ${itemChoice.cueTone||''}`;cue.textContent=itemChoice.cue;main.appendChild(cue);}button.appendChild(main);const small=document.createElement('small');small.textContent='Tap to choose';button.appendChild(small);}
-function choiceSpeech(itemChoice){const word=itemChoice.speech||itemChoice.label;const support=itemChoice.example||itemChoice.cueSpeech;return support?`${word}. ${support}.`:word;}
+function choiceSpeech(itemChoice){const word=itemChoice.speech||itemChoice.label;if(itemChoice.example)return[word,itemChoice.example];return itemChoice.cueSpeech?`${word}. ${itemChoice.cueSpeech}.`:word;}
 
 function renderQuestion(){
   stopAnswerFx();const item=questions[current];$('section-label').textContent=item.section;$('progress-label').textContent=`${item.position} of 20`;$('leaf-number').textContent=item.position;$('progress-bar').style.width=`${item.position/20*100}%`;$('question-icon').textContent=item.icon;$('question-tag').textContent=item.tag;$('question-text').textContent=item.q;$('question-hint').textContent=item.hint;$('feedback').textContent='';$('feedback').className='feedback';$('practice-popup').hidden=true;$('next-btn').classList.remove('show');$('choices').innerHTML='';renderQuestionVisual(item);
