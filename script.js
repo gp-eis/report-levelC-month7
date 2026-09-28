@@ -14,7 +14,7 @@ const w4 = 'assets/questions/week-4';
 const picture = (src, alt, focus = null) => ({type:'image',src,alt,...(focus?{focus}:{})});
 const choice = (label, speech=label, extra={}) => ({label,speech,...extra});
 const supportedChoice = (label, cue, cueTone, cueSpeech=cue) => choice(label,label,{cue,cueTone,cueSpeech});
-const shouldChoices = () => [supportedChoice('should','✓ Good choice','yes','good choice'),supportedChoice('should not','✕ Not safe','no','not safe')];
+const shouldChoices = () => [supportedChoice('should','O','yes icon',null),supportedChoice('should not','X','no icon',null)];
 const timeChoices = () => [supportedChoice('find','🔎 Now','now','now'),supportedChoice('found','↶ Before','past','before')];
 const placeChoices = (onLabel='on',behindLabel='behind') => [supportedChoice(onLabel,'⬆ On top','place','on top'),supportedChoice(behindLabel,'👀 At the back','place','at the back')];
 
