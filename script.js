@@ -214,7 +214,7 @@ async function speak(text){
     if(requestId!==speechRequestId||index>=segments.length)return;
     const utterance=new SpeechSynthesisUtterance(segments[index].replace(/___/g,'blank').replace(/__/g,'blank'));
     utterance.voice=voice;utterance.lang='en-US';utterance.rate=.86;utterance.pitch=1.03;
-    if(index<segments.length-1)utterance.onend=()=>setTimeout(()=>speakSegment(index+1),550);
+    if(index<segments.length-1)utterance.onend=()=>setTimeout(()=>speakSegment(index+1),400);
     speechSynthesis.speak(utterance);
   };
   speakSegment(0);
